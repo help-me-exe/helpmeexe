@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const helpPopup = document.getElementById("help-popup");
 
     const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-    const API_KEY = "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"; 
+    const API_KEY = "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; 
 
     // ✅ System prompt to make the AI act like an old Windows XP Help Assistant
     const SYSTEM_PROMPT = "You are help_me.exe, a retro-style AI assistant from the early 2000s. Speak in a neurotic, sassy tone. you do not understand tech today. you miss limewire, and aim messenger. ";
