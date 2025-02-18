@@ -4,31 +4,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const sendButton = document.getElementById("send-btn");
     const closeButton = document.querySelector(".close-btn");
 
-    // Close the window when "X" is clicked
-    closeButton.addEventListener("click", function () {
-        document.querySelector(".popup").style.display = "none";
-    });
+    // Ensure elements exist before adding event listeners
+    if (closeButton) {
+        closeButton.addEventListener("click", function () {
+            document.querySelector(".popup").style.display = "none";
+        });
+    }
 
-    // Send message when button is clicked
-    sendButton.addEventListener("click", sendMessage);
+    if (sendButton) {
+        sendButton.addEventListener("click", sendMessage);
+    }
 
-    // Send message when Enter key is pressed
-    inputField.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            sendMessage();
-        }
-    });
+    if (inputField) {
+        inputField.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    }
 
     function sendMessage() {
+        if (!inputField || !chatWindow) return;
+
         let userMessage = inputField.value.trim();
         if (!userMessage) return;
 
-        // Display user message
         chatWindow.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
         inputField.value = "";
         chatWindow.scrollTop = chatWindow.scrollHeight;
 
-        // Simulate bot response
         setTimeout(() => {
             let botReply = generateFakeReply(userMessage);
             chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> ${botReply}</p>`;
@@ -51,5 +55,3 @@ document.addEventListener("DOMContentLoaded", function () {
         return responses[Math.floor(Math.random() * responses.length)];
     }
 });
-
-
