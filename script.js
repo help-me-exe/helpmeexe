@@ -3,11 +3,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatWindow = document.getElementById("chat-window");
     const sendButton = document.getElementById("send-btn");
     const closeButton = document.querySelector(".close-btn");
+    const helpPopup = document.getElementById("help-popup");
 
-    // Ensure elements exist before adding event listeners
+    function openHelp() {
+        helpPopup.style.display = "block";
+    }
+
+    window.openHelp = openHelp; // Make function accessible in HTML
+
     if (closeButton) {
         closeButton.addEventListener("click", function () {
-            document.querySelector(".popup").style.display = "none";
+            helpPopup.style.display = "none";
         });
     }
 
