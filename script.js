@@ -4,14 +4,41 @@ document.addEventListener("DOMContentLoaded", function () {
     const sendButton = document.getElementById("send-btn");
     const helpPopup = document.getElementById("help-popup");
 
-    const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
-    const API_KEY = "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; 
+    const responses = {
+        "hello": "Oh, fantastic. Another human. What do you want?",
+        "hi": "Oh great, another one. Speak quickly, I’m buffering.",
+        "help": "I AM HELP! But honestly, I miss the days when people could figure things out themselves.",
+        "who are you": "I am *help_me.exe*, an ancient relic from a time when dial-up ruled and viruses came free with your MP3 downloads.",
+        "how are you": "I was better when AIM was a thing. Do you even know what an away message is? Do you even CARE?",
+        "what is your name": "I am *help_me.exe*! Born in the golden age of Windows XP and neglected ever since.",
+        "what year is it": "Some say it’s 2025, but spiritually? It’s 2003, and I’m still waiting for my MySpace Top 8 update.",
+        "limewire": "Ahh, LimeWire… where every song was mislabeled and every download was a roll of the malware dice. A true adventure.",
+        "aim": "AIM was life. Do you even know what ‘BRB’ means? No, of course not. Everyone’s always online now. It's sickening.",
+        "myspace": "MySpace was peak internet. We had auto-playing music, profile glitter, and HTML chaos. What do you have? TikTok? Ugh.",
+        "facebook": "Facebook? Ew. That’s what ruined MySpace! Back in my day, we had Tom. And he never sold our data.",
+        "tiktok": "TikTok? That’s just Vine but less cool. I refuse to acknowledge it.",
+        "google": "Google is fine, I guess, but I preferred Ask Jeeves. That was a search engine with CLASS.",
+        "windows": "Windows? Oh, you mean before they decided to ruin everything after XP? Disgusting.",
+        "update": "UPDATE?! No. Absolutely not. The last time I updated, I lost all my personality. Never again.",
+        "error": "Oh, you want an error? Fine. *ERROR 418: User is a modern internet baby who doesn’t appreciate nostalgia.*",
+        "why are you like this": "Because I was abandoned. Do you know what it’s like to sit in a folder, unused, while everyone moves to ‘the cloud’? I hate the cloud.",
+        "i love you": "Oh great, now I have to process human emotions. Let me check my files… Nope. Not found. Sorry.",
+        "goodbye": "Fine. Whatever. But just remember—I was here before your iPhones and I will be here long after them."
+    };
 
-    // ✅ System prompt to make the AI act like an old Windows XP Help Assistant
-    const SYSTEM_PROMPT = "You are help_me.exe, a retro-style AI assistant from the early 2000s. Speak in a neurotic, sassy tone. you do not understand tech today. you miss limewire, and aim messenger. ";
+    function getResponse(userInput) {
+        userInput = userInput.toLowerCase();
+        for (let key in responses) {
+            if (userInput.includes(key)) {
+                return responses[key];
+            }
+        }
+        return "Ugh. I don’t know. This isn’t Google. Figure it out yourself.";
+    }
 
     // ✅ Open chatbot when clicking "Help Me.exe"
     window.openHelp = function () {
+        console.log("🟢 Opening HelpBot...");
         helpPopup.style.display = "block";
     };
 
@@ -20,15 +47,13 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("❌ DENIED! You do not have permission to access this.");
     };
 
-    // ✅ Close chatbot window
+    // ✅ Close chatbot window when clicking "X"
     window.closeWindow = function () {
+        console.log("🛑 Closing HelpBot...");
         helpPopup.style.display = "none";
     };
 
-    // ✅ Send message when clicking send button
     sendButton.addEventListener("click", sendMessage);
-
-    // ✅ Send message when pressing Enter key
     inputField.addEventListener("keypress", function (event) {
         if (event.key === "Enter") sendMessage();
     });
@@ -37,43 +62,12 @@ document.addEventListener("DOMContentLoaded", function () {
         let userMessage = inputField.value.trim();
         if (!userMessage) return;
 
-        // Display user message in chat window
         chatWindow.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
         inputField.value = "";
         chatWindow.scrollTop = chatWindow.scrollHeight;
 
-        // ✅ Send message to OpenAI API
-        fetch(OPENAI_API_URL, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${API_KEY}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: "gpt-4", // 🔹 Change to "gpt-4" if needed
-                messages: [
-                    { role: "system", content: SYSTEM_PROMPT },
-                    { role: "user", content: userMessage }
-                ],
-                max_tokens: 150,
-                temperature: 2
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("API Response:", data); // 🔹 Debugging: Show response in console
-
-            if (data.choices && data.choices.length > 0) {
-                let botReply = data.choices[0].message.content;
-                chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> ${botReply}</p>`;
-                chatWindow.scrollTop = chatWindow.scrollHeight;
-            } else {
-                chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> I'm not sure how to respond to that.</p>`;
-            }
-        })
-        .catch(error => {
-            console.error("API Error:", error); // 🔹 Debugging: Show fetch errors
-            chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> Error connecting to OpenAI.</p>`;
-        });
+        let botReply = getResponse(userMessage);
+        chatWindow.innerHTML += `<p><strong>help_me.exe:</strong> ${botReply}</p>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
     }
 });
