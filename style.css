@@ -1,12 +1,13 @@
+/* 🌎 Windows XP/2000 Background */
 body {
     background: url('https://upload.wikimedia.org/wikipedia/en/2/2b/Windows_XP_Luna.png');
     background-size: cover;
-    font-family: Arial, sans-serif;
+    font-family: "Tahoma", sans-serif;
     margin: 0;
     overflow: hidden;
 }
 
-/* 🖥️ Fake Desktop Icons */
+/* 🖥️ Desktop Icons */
 .desktop-icons {
     position: absolute;
     top: 20px;
@@ -34,7 +35,7 @@ body {
     text-shadow: 1px 1px 3px black;
 }
 
-/* 📂 Pop-Up Window */
+/* 💾 Pop-Up Window */
 .popup {
     width: 400px;
     height: 350px;
@@ -123,7 +124,7 @@ button {
     user-select: none;
 }
 
-.taskbar-time {
+.taskbar-clock {
     color: white;
     font-size: 14px;
     font-weight: bold;
