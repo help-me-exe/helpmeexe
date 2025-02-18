@@ -7,7 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="popup">
+    <!-- Fake Desktop Icons -->
+    <div class="desktop-icons">
+        <div class="icon">
+            <img src="icon-folder.png" alt="My Documents">
+            <span>My Documents</span>
+        </div>
+        <div class="icon">
+            <img src="icon-computer.png" alt="My Computer">
+            <span>My Computer</span>
+        </div>
+        <div class="icon">
+            <img src="icon-help.png" alt="Help Me.exe" onclick="openHelp()">
+            <span>Help Me.exe</span>
+        </div>
+    </div>
+
+    <!-- Fake Pop-Up Window -->
+    <div class="popup" id="help-popup">
         <div class="header">
             <span>help_me.exe - Help Assistant</span>
             <span class="close-btn" onclick="closeWindow()">X</span>
@@ -20,6 +37,13 @@
             <button id="send-btn">Send</button>
         </div>
     </div>
- <script src="script.js"></script>
+
+    <!-- Fake Taskbar -->
+    <div class="taskbar">
+        <div class="start-button">Start</div>
+        <div class="taskbar-time" id="clock"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
