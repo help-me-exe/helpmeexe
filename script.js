@@ -5,33 +5,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeButton = document.querySelector(".close-btn");
     const helpPopup = document.getElementById("help-popup");
 
-    function openHelp() {
+    // 🟢 Open the pop-up when clicking HelpMe.exe
+    window.openHelp = function () {
         helpPopup.style.display = "block";
-    }
+    };
 
-    window.openHelp = openHelp; // Make function accessible in HTML
+    // 🔴 Close the pop-up
+    closeButton.addEventListener("click", function () {
+        helpPopup.style.display = "none";
+    });
 
-    if (closeButton) {
-        closeButton.addEventListener("click", function () {
-            helpPopup.style.display = "none";
-        });
-    }
-
-    if (sendButton) {
-        sendButton.addEventListener("click", sendMessage);
-    }
-
-    if (inputField) {
-        inputField.addEventListener("keypress", function (event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        });
-    }
+    // ✉️ Send Message
+    sendButton.addEventListener("click", sendMessage);
+    inputField.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") sendMessage();
+    });
 
     function sendMessage() {
-        if (!inputField || !chatWindow) return;
-
         let userMessage = inputField.value.trim();
         if (!userMessage) return;
 
@@ -46,17 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1000);
     }
 
-    function generateFakeReply(input) {
+    function generateFakeReply() {
         let responses = [
             "Hmm... let me think about that.",
             "Have you tried turning it off and on again?",
-            "I'm just a simple bot from 2002, can you rephrase?",
             "Check the manual, maybe?",
-            "I don't have that information... yet!",
-            "Sounds like a you problem! Just kidding. :)",
-            "I'm still buffering... wait, do I even buffer?",
             "Error 404: Useful response not found.",
-            "Let me consult my ancient knowledge... nope, nothing."
         ];
         return responses[Math.floor(Math.random() * responses.length)];
     }
