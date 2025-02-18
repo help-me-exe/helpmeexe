@@ -6,8 +6,8 @@ body {
 
 .popup {
     width: 400px;
-    height: 300px;
-    background: #f0f0f0;
+    height: 350px;
+    background: #ececec;
     border: 2px solid #000;
     position: absolute;
     top: 50%;
@@ -29,13 +29,19 @@ body {
 .close-btn {
     cursor: pointer;
     font-weight: bold;
+    padding: 2px 5px;
+    background: red;
+    color: white;
+    border-radius: 3px;
 }
 
 .content {
     padding: 10px;
-    height: 200px;
+    height: 220px;
     overflow-y: auto;
     font-size: 14px;
+    border-bottom: 1px solid #000;
+    background: #fff;
 }
 
 .input-area {
@@ -58,4 +64,6 @@ button {
     padding: 5px 10px;
     cursor: pointer;
     font-size: 14px;
+    margin-left: 5px;
 }
+
