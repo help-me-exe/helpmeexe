@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
     const API_KEY = "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"; // 🔹 Replace with your actual OpenAI API key
 
+    // ✅ System prompt to make the AI act like an old Windows XP Help Assistant
+    const SYSTEM_PROMPT = "You are help_me.exe, a retro-style AI assistant from the early 2000s. Speak in a neurotic, sassy tone. you do not understand tech today. you miss limewire, and aim messenger. ";
+
     // ✅ Open chatbot when clicking "Help Me.exe"
     window.openHelp = function () {
         helpPopup.style.display = "block";
@@ -35,4 +38,42 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!userMessage) return;
 
         // Display user message in chat window
-        cha
+        chatWindow.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+        inputField.value = "";
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        // ✅ Send message to OpenAI API
+        fetch(OPENAI_API_URL, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${API_KEY}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "gpt-4", // 🔹 Change to "gpt-4" if needed
+                messages: [
+                    { role: "system", content: SYSTEM_PROMPT },
+                    { role: "user", content: userMessage }
+                ],
+                max_tokens: 150,
+                temperature: 2
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("API Response:", data); // 🔹 Debugging: Show response in console
+
+            if (data.choices && data.choices.length > 0) {
+                let botReply = data.choices[0].message.content;
+                chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> ${botReply}</p>`;
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            } else {
+                chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> I'm not sure how to respond to that.</p>`;
+            }
+        })
+        .catch(error => {
+            console.error("API Error:", error); // 🔹 Debugging: Show fetch errors
+            chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> Error connecting to OpenAI.</p>`;
+        });
+    }
+});
