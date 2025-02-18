@@ -1,68 +1,33 @@
-let zIndexCounter = 1;
-
-// Toggle Start Menu
-function toggleStartMenu() {
-    let menu = document.getElementById("start-menu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+function closeWindow() {
+    document.querySelector(".popup").style.display = "none";
 }
 
-// Open a Window
-function openWindow(title) {
-    let container = document.getElementById("windows-container");
+async function sendMessage() {
+    let inputField = document.getElementById("user-input");
+    let chatWindow = document.getElementById("chat-window");
+    let userMessage = inputField.value.trim();
 
-    // Create Window
-    let windowDiv = document.createElement("div");
-    windowDiv.classList.add("window");
-    windowDiv.style.top = Math.random() * 200 + "px";
-    windowDiv.style.left = Math.random() * 200 + "px";
-    windowDiv.style.zIndex = zIndexCounter++;
+    if (!userMessage) return;
 
-    // Window Header
-    let header = document.createElement("div");
-    header.classList.add("window-header");
-    header.innerHTML = `<span>${title}</span> <span class="close-btn" onclick="this.parentElement.parentElement.remove()">X</span>`;
-    windowDiv.appendChild(header);
+    chatWindow.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+    inputField.value = "";
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 
-    // Window Content
-    let content = document.createElement("div");
-    content.innerHTML = `<p>This is the ${title} window.</p>`;
-    windowDiv.appendChild(content);
-
-    // Drag Functionality
-    makeDraggable(windowDiv);
-
-    // Add to Screen
-    container.appendChild(windowDiv);
+    setTimeout(() => {
+        let botReply = generateFakeReply(userMessage);
+        chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> ${botReply}</p>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }, 1000);
 }
 
-// Make Windows Draggable
-function makeDraggable(element) {
-    let header = element.querySelector(".window-header");
-    let offsetX, offsetY, isDragging = false;
-
-    header.onmousedown = function(event) {
-        isDragging = true;
-        offsetX = event.clientX - element.offsetLeft;
-        offsetY = event.clientY - element.offsetTop;
-    };
-
-    document.onmousemove = function(event) {
-        if (isDragging) {
-            element.style.left = (event.clientX - offsetX) + "px";
-            element.style.top = (event.clientY - offsetY) + "px";
-        }
-    };
-
-    document.onmouseup = function() {
-        isDragging = false;
-    };
+function generateFakeReply(input) {
+    let responses = [
+        "Hmm... let me think about that.",
+        "Have you tried turning it off and on again?",
+        "I'm just a simple bot from 2002, can you rephrase?",
+        "Check the manual, maybe?",
+        "I don't have that information... yet!",
+        "Sounds like a you problem! Just kidding. :)"
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
 }
-
-// Update Clock
-function updateClock() {
-    let clock = document.getElementById("clock");
-    let now = new Date();
-    clock.textContent = now.toLocaleTimeString();
-}
-
-setInterval(updateClock, 1000);
