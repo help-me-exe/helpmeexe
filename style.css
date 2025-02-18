@@ -1,6 +1,6 @@
-/* 🌎 Windows XP/2000 Background (Local File in Same Directory) */
+/* 🌎 Windows XP/2000 Background */
 body {
-    background: url('./background.jpg') no-repeat center center fixed;
+    background: url('./background.jpg.png') no-repeat center center fixed;
     background-size: cover;
     font-family: "Tahoma", sans-serif;
     margin: 0;
@@ -28,23 +28,23 @@ body {
     text-align: center;
 }
 
-/* ✅ Fix Icons Not Loading */
+/* ✅ Fix Icons Not Loading (Updated Filenames) */
 .icon-help {
-    background: url('./icon-help.png') no-repeat center;
+    background: url('./icon-help.png.png') no-repeat center;
     background-size: contain;
     width: 50px;
     height: 50px;
 }
 
 .icon-folder {
-    background: url('./icon-folder.png') no-repeat center;
+    background: url('./icon-folder.png.png') no-repeat center;
     background-size: contain;
     width: 50px;
     height: 50px;
 }
 
 .icon-computer {
-    background: url('./icon-computer.png') no-repeat center;
+    background: url('./icon-computer.png.png') no-repeat center;
     background-size: contain;
     width: 50px;
     height: 50px;
@@ -153,3 +153,4 @@ button {
     font-size: 14px;
     font-weight: bold;
 }
+
