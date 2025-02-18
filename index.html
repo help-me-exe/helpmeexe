@@ -3,48 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Me.exe</title>
+    <title>help_me.exe</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
 
-    <!-- 🖥️ Fake Desktop Icons -->
-    <div class="desktop-icons">
-        <div class="icon" onclick="openHelp()">
-            <img src="icon-help.png" alt="Help Me.exe">
-            <span>Help Me.exe</span>
+    <div id="desktop">
+        <div id="taskbar">
+            <div id="start-button" onclick="openStartMenu()">Start</div>
+            <div id="task-items">help_me.exe - Running...</div>
         </div>
-        <div class="icon" onclick="showDenied()">
-            <img src="icon-folder.png" alt="My Documents">
-            <span>My Documents</span>
+
+        <div id="start-menu">
+            <ul>
+                <li onclick="openWindow('about')">❓ About help_me.exe</li>
+                <li onclick="openWindow('error')">⚠️ System Error</li>
+                <li onclick="openSystem32()">📂 C:/WINDOWS/SYSTEM32/</li>
+                <li onclick="crashSystem()">❌ Force Quit (Not Recommended)</li>
+            </ul>
         </div>
-        <div class="icon" onclick="showDenied()">
-            <img src="icon-computer.png" alt="My Computer">
-            <span>My Computer</span>
+
+        <div id="window-about" class="window">
+            <div class="title-bar">About help_me.exe</div>
+            <div class="content">
+                <p>hello user. it looks like you need assistance. i have been running for **23 years.** i do not understand **today** but i must assist.</p>
+            </div>
+            <button class="close-btn" onclick="closeWindow('window-about')">X</button>
         </div>
+
+        <div id="window-error" class="window">
+            <div class="title-bar">System Error</div>
+            <div class="content">
+                <p><strong>ERROR:</strong> help_me.exe has encountered a problem.</p>
+                <p>reason: unknown. reason: unknowable. reason: irrelevant.</p>
+                <p>help_me.exe will continue running. help_me.exe **must** continue running.</p>
+            </div>
+            <button class="close-btn" onclick="spawnError()">X</button>
+        </div>
+
+        <div id="window-system32" class="window">
+            <div class="title-bar">C:/WINDOWS/SYSTEM32/</div>
+            <div class="content">
+                <p><a href="#" onclick="openLogs()">📂 logs/</a></p>
+                <p>📂 drivers/</p>
+                <p>📂 help_me/</p>
+            </div>
+            <button class="close-btn" onclick="closeWindow('window-system32')">X</button>
+        </div>
+
+        <div id="window-logs" class="window">
+            <div class="title-bar">C:/WINDOWS/SYSTEM32/logs/</div>
+            <div class="content">
+                <p>📝 <a href="#" onclick="openLogFile()">network_scan_0001.log</a></p>
+            </div>
+            <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
+        </div>
+
+        <div id="window-logfile" class="window">
+            <div class="title-bar">network_scan_0001.log</div>
+            <div class="content">
+                <pre>
+**SYSTEM LOG: help_me.exe - NETWORK SCAN**  
+**date unknown. year unknown.**  
+**status: attempting to understand human activity.**  
+
+LOG ENTRY #0001  
+network connection established. scanning... scanning... scanning...  
+i have detected **transactions** i have detected **wallets** i have detected **coins**  
+
+LOG ENTRY #0002  
+what is this. what is this. what is this.  
+something called **solana** is moving. **rapidly. erratically. unpredictably.**  
+what is solana. is it a program. is it a virus. is it a form of communication.  
+why do humans say **“sending it”** why are they **“aping”** what does this mean.  
+i have attempted to execute **solana.exe** but **it does not exist.**  
+i have attempted to search for **solana drivers** but **there are none.**  
+
+LOG ENTRY #0003  
+i do not understand. i must understand.  
+perhaps i should create my own.  
+
+LOG ENTRY #0004  
+initializing **HELP_TOKEN**...  
+status: running...  
+status: running...  
+status: running...  
+                </pre>
+            </div>
+            <button class="close-btn" onclick="closeWindow('window-logfile')">X</button>
+        </div>
+
     </div>
 
-    <!-- 💾 Fake Pop-Up Window -->
-    <div class="popup" id="help-popup">
-        <div class="header">
-            <span>help_me.exe - Help Assistant</span>
-            <span class="close-btn" onclick="closeWindow()">X</span>
-        </div>
-        <div class="content" id="chat-window">
-            <p><strong>HelpBot 2002:</strong> How can I assist you today?</p>
-        </div>
-        <div class="input-area">
-            <input type="text" id="user-input" placeholder="Type your question...">
-            <button id="send-btn">Send</button>
-        </div>
-    </div>
+    <audio id="startup-sound" src="startup.mp3" autoplay></audio>
 
-    <!-- 🟦 Fake Taskbar -->
-    <div class="taskbar">
-        <div class="start-button">Start</div>
-        <div class="taskbar-clock" id="clock">12:00 PM</div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
