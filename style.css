@@ -1,156 +1,51 @@
-/* 🌎 Windows XP/2000 Background */
 body {
-    background: url('./background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    font-family: "Tahoma", sans-serif;
+    background-color: #008080;
+    color: #fff;
+    font-family: 'Courier New', monospace;
     margin: 0;
     overflow: hidden;
 }
 
-/* 🖥️ Desktop Icons */
-.desktop-icons {
+#desktop {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    z-index: 2; /* Ensure icons are clickable */
+    width: 100%;
+    height: 100vh;
+    background: url('xp-bg.jpg') no-repeat center center;
+    background-size: cover;
 }
 
-.icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    width: 80px;
-    text-align: center;
-}
-
-/* ✅ Fix Icons Not Loading (Updated Filenames) */
-.icon-help {
-    background: url('./icon-help.png') no-repeat center;
-    background-size: contain;
-    width: 50px;
-    height: 50px;
-}
-
-.icon-folder {
-    background: url('./icon-folder.png') no-repeat center;
-    background-size: contain;
-    width: 50px;
-    height: 50px;
-}
-
-.icon-computer {
-    background: url('./icon-computer.png') no-repeat center;
-    background-size: contain;
-    width: 50px;
-    height: 50px;
-}
-
-.icon span {
-    font-size: 12px;
-    color: white;
-    text-shadow: 1px 1px 3px black;
-}
-
-/* 💾 Pop-Up Window */
-.popup {
-    width: 400px;
-    height: 350px;
-    background: #ececec;
-    border: 2px solid #000;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-    display: none;
-    z-index: 10; /* Ensure pop-up appears above other elements */
-}
-
-.header {
-    background: #0033cc;
-    color: white;
-    padding: 5px;
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.close-btn {
-    cursor: pointer;
-    font-weight: bold;
-    padding: 2px 5px;
-    background: red;
-    color: white;
-    border-radius: 3px;
-}
-
-/* 📜 Chat Content */
-.content {
-    padding: 10px;
-    height: 220px;
-    overflow-y: auto;
-    font-size: 14px;
-    border-bottom: 1px solid #000;
-    background: #fff;
-}
-
-.input-area {
-    display: flex;
-    padding: 10px;
-    background: #ddd;
-}
-
-input {
-    flex: 1;
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #000;
-}
-
-button {
-    background: #0033cc;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 5px;
-}
-
-/* 🟦 Taskbar */
-.taskbar {
-    position: absolute;
+#taskbar {
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 40px;
-    background: linear-gradient(to bottom, #0078d7, #005bb5);
+    background: #00008b;
+    color: #fff;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 0 10px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-    z-index: 5; /* Ensure taskbar is above desktop */
 }
 
-.start-button {
-    background: #0033cc;
-    color: white;
-    padding: 5px 10px;
+#start-button {
+    background: #0000ff;
+    padding: 5px 15px;
+    border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    border-radius: 3px;
-    user-select: none;
 }
 
-.taskbar-clock {
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
+.window {
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    background: #fff;
+    color: #000;
+    border: 2px solid #000;
+    display: none;
 }
 
+.title-bar {
+    background: #00008b;
+    color: #fff;
+    padding: 5px;
+}
