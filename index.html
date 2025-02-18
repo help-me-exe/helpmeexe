@@ -3,40 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows XP - HelpMeExe</title>
+    <title>Help Me.exe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Desktop -->
-    <div id="desktop">
-        <div class="icon" onclick="openWindow('My Computer')">
-            <img src="icons/computer.png" alt="My Computer">
-            <p>My Computer</p>
+    <div class="popup">
+        <div class="header">
+            <span>help_me.exe - Help Assistant</span>
+            <span onclick="closeWindow()" class="close-btn">X</span>
         </div>
-        <div class="icon" onclick="openWindow('Recycle Bin')">
-            <img src="icons/recycle.png" alt="Recycle Bin">
-            <p>Recycle Bin</p>
+        <div class="content" id="chat-window">
+            <p><strong>HelpBot 2002:</strong> How can I assist you today?</p>
+        </div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your question...">
+            <button onclick="sendMessage()">Send</button>
         </div>
     </div>
-
-    <!-- Taskbar -->
-    <div id="taskbar">
-        <div id="start-button" onclick="toggleStartMenu()">Start</div>
-        <div id="taskbar-apps"></div>
-        <div id="clock">12:00 PM</div>
-    </div>
-
-    <!-- Start Menu -->
-    <div id="start-menu">
-        <div class="menu-item" onclick="openWindow('My Documents')">📁 My Documents</div>
-        <div class="menu-item" onclick="openWindow('Notepad')">📝 Notepad</div>
-        <div class="menu-item" onclick="alert('Shutting down...')">🔴 Shut Down</div>
-    </div>
-
-    <!-- Windows (Dynamically Created) -->
-    <div id="windows-container"></div>
-
     <script src="script.js"></script>
 </body>
 </html>
