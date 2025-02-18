@@ -5,17 +5,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeButton = document.querySelector(".close-btn");
     const helpPopup = document.getElementById("help-popup");
 
-    // 🟢 Open the pop-up when clicking HelpMe.exe
+    // ✅ Make icons clickable
     window.openHelp = function () {
         helpPopup.style.display = "block";
     };
 
-    // 🔴 Close the pop-up
+    // ✅ Close button now works
     closeButton.addEventListener("click", function () {
         helpPopup.style.display = "none";
     });
 
-    // ✉️ Send Message
+    // ✅ Send button works
     sendButton.addEventListener("click", sendMessage);
     inputField.addEventListener("keypress", function (event) {
         if (event.key === "Enter") sendMessage();
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         chatWindow.scrollTop = chatWindow.scrollHeight;
 
         setTimeout(() => {
-            let botReply = generateFakeReply(userMessage);
+            let botReply = generateFakeReply();
             chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> ${botReply}</p>`;
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }, 1000);
