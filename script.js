@@ -5,26 +5,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeButton = document.querySelector(".close-btn");
     const helpPopup = document.getElementById("help-popup");
 
-    // ✅ Open chatbot when clicking "Help Me.exe"
+    // ✅ Function to close the popup window
+    window.closeWindow = function () {
+        helpPopup.style.display = "none";
+    };
+
+    // ✅ Function to open the chatbot popup
     window.openHelp = function () {
         helpPopup.style.display = "block";
     };
 
-    // ❌ Denied pop-up for other icons
+    // ❌ Function to show "DENIED" message when clicking other icons
     window.showDenied = function () {
         alert("❌ DENIED! You do not have permission to access this.");
     };
 
-    // ✅ Close chatbot
-    closeButton.addEventListener("click", function () {
-        helpPopup.style.display = "none";
-    });
+    // ✅ Close the chatbot window when clicking "X"
+    if (closeButton) {
+        closeButton.addEventListener("click", closeWindow);
+    }
 
-    // ✅ Send message
-    sendButton.addEventListener("click", sendMessage);
-    inputField.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") sendMessage();
-    });
+    // ✅ Send message when clicking the button
+    if (sendButton) {
+        sendButton.addEventListener("click", sendMessage);
+    }
+
+    // ✅ Send message when pressing Enter key
+    if (inputField) {
+        inputField.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") sendMessage();
+        });
+    }
 
     function sendMessage() {
         let userMessage = inputField.value.trim();
