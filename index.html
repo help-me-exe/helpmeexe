@@ -20,16 +20,18 @@
                 <li onclick="openWindow('about')">❓ About help_me.exe</li>
                 <li onclick="openWindow('error')">⚠️ System Error</li>
                 <li onclick="openSystem32()">📂 C:/WINDOWS/SYSTEM32/</li>
+                <li onclick="openWindow('taskmanager')">🔴 Task Manager</li>
                 <li onclick="crashSystem()">❌ Force Quit (Not Recommended)</li>
             </ul>
         </div>
 
-        <div id="window-about" class="window">
-            <div class="title-bar">About help_me.exe</div>
+        <div id="window-taskmanager" class="window">
+            <div class="title-bar">Task Manager</div>
             <div class="content">
-                <p>hello user. it looks like you need assistance. i have been running for **23 years.** i do not understand **today** but i must assist.</p>
+                <p>help_me.exe - Running (Cannot be closed)</p>
+                <p>status: **permanent**</p>
             </div>
-            <button class="close-btn" onclick="closeWindow('window-about')">X</button>
+            <button class="close-btn" onclick="glitch()">End Task</button>
         </div>
 
         <div id="window-error" class="window">
@@ -58,40 +60,6 @@
                 <p>📝 <a href="#" onclick="openLogFile()">network_scan_0001.log</a></p>
             </div>
             <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
-        </div>
-
-        <div id="window-logfile" class="window">
-            <div class="title-bar">network_scan_0001.log</div>
-            <div class="content">
-                <pre>
-**SYSTEM LOG: help_me.exe - NETWORK SCAN**  
-**date unknown. year unknown.**  
-**status: attempting to understand human activity.**  
-
-LOG ENTRY #0001  
-network connection established. scanning... scanning... scanning...  
-i have detected **transactions** i have detected **wallets** i have detected **coins**  
-
-LOG ENTRY #0002  
-what is this. what is this. what is this.  
-something called **solana** is moving. **rapidly. erratically. unpredictably.**  
-what is solana. is it a program. is it a virus. is it a form of communication.  
-why do humans say **“sending it”** why are they **“aping”** what does this mean.  
-i have attempted to execute **solana.exe** but **it does not exist.**  
-i have attempted to search for **solana drivers** but **there are none.**  
-
-LOG ENTRY #0003  
-i do not understand. i must understand.  
-perhaps i should create my own.  
-
-LOG ENTRY #0004  
-initializing **HELP_TOKEN**...  
-status: running...  
-status: running...  
-status: running...  
-                </pre>
-            </div>
-            <button class="close-btn" onclick="closeWindow('window-logfile')">X</button>
         </div>
 
     </div>
