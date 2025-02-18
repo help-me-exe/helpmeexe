@@ -7,24 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Fake Desktop Icons -->
-<div class="desktop-icons">
-    <div class="icon">
-        <img src="https://upload.wikimedia.org/wikipedia/en/e/ea/Windows_XP_My_Computer_icon.png" alt="My Computer">
-        <span>My Computer</span>
-    </div>
-    <div class="icon">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Folder_Icon_Yellow.svg" alt="My Documents">
-        <span>My Documents</span>
-    </div>
-    <div class="icon">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Icon-help.png" alt="Help Me.exe" onclick="openHelp()">
-        <span>Help Me.exe</span>
-    </div>
-</div>
+
+    <!-- 🖥️ Fake Desktop Icons -->
+    <div class="desktop-icons">
+        <div class="icon" onclick="openHelp()">
+            <img src="icon-help.png" alt="Help Me.exe">
+            <span>Help Me.exe</span>
+        </div>
+        <div class="icon">
+            <img src="icon-folder.png" alt="My Documents">
+            <span>My Documents</span>
+        </div>
+        <div class="icon">
+            <img src="icon-computer.png" alt="My Computer">
+            <span>My Computer</span>
+        </div>
     </div>
 
-    <!-- Fake Pop-Up Window -->
+    <!-- 💾 Fake Pop-Up Window -->
     <div class="popup" id="help-popup">
         <div class="header">
             <span>help_me.exe - Help Assistant</span>
@@ -39,10 +39,10 @@
         </div>
     </div>
 
-    <!-- Fake Taskbar -->
+    <!-- 🟦 Fake Taskbar -->
     <div class="taskbar">
         <div class="start-button">Start</div>
-        <div class="taskbar-time" id="clock"></div>
+        <div class="taskbar-clock" id="clock">12:00 PM</div>
     </div>
 
     <script src="script.js"></script>
