@@ -10,14 +10,14 @@
     <div class="popup">
         <div class="header">
             <span>help_me.exe - Help Assistant</span>
-            <span class="close-btn">X</span>
+            <span class="close-btn" onclick="closeWindow()">X</span>
         </div>
         <div class="content" id="chat-window">
             <p><strong>HelpBot 2002:</strong> How can I assist you today?</p>
         </div>
         <div class="input-area">
             <input type="text" id="user-input" placeholder="Type your question...">
-            <button>Send</button>
+            <button id="send-btn">Send</button>
         </div>
     </div>
     <script src="script.js"></script>
