@@ -42,10 +42,20 @@ body {
     color: #000;
     border: 2px solid #000;
     display: none;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .title-bar {
     background: #00008b;
     color: #fff;
     padding: 5px;
+}
+
+.glitch {
+    animation: glitch 0.1s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    100% { transform: translate(-1px, -1px) rotate(1deg); }
 }
