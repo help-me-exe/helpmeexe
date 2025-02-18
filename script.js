@@ -5,17 +5,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeButton = document.querySelector(".close-btn");
     const helpPopup = document.getElementById("help-popup");
 
-    // ✅ Make icons clickable
+    // ✅ Open chatbot when clicking "Help Me.exe"
     window.openHelp = function () {
         helpPopup.style.display = "block";
     };
 
-    // ✅ Close button now works
+    // ❌ Denied pop-up for other icons
+    window.showDenied = function () {
+        alert("❌ DENIED! You do not have permission to access this.");
+    };
+
+    // ✅ Close chatbot
     closeButton.addEventListener("click", function () {
         helpPopup.style.display = "none";
     });
 
-    // ✅ Send button works
+    // ✅ Send message
     sendButton.addEventListener("click", sendMessage);
     inputField.addEventListener("keypress", function (event) {
         if (event.key === "Enter") sendMessage();
