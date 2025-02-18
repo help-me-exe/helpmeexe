@@ -1,33 +1,47 @@
-function closeWindow() {
-    document.querySelector(".popup").style.display = "none";
-}
+document.addEventListener("DOMContentLoaded", function () {
+    const inputField = document.getElementById("user-input");
+    const chatWindow = document.getElementById("chat-window");
 
-async function sendMessage() {
-    let inputField = document.getElementById("user-input");
-    let chatWindow = document.getElementById("chat-window");
-    let userMessage = inputField.value.trim();
+    document.querySelector(".close-btn").addEventListener("click", function () {
+        document.querySelector(".popup").style.display = "none";
+    });
 
-    if (!userMessage) return;
+    document.querySelector("button").addEventListener("click", sendMessage);
 
-    chatWindow.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
-    inputField.value = "";
-    chatWindow.scrollTop = chatWindow.scrollHeight;
+    inputField.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    });
 
-    setTimeout(() => {
-        let botReply = generateFakeReply(userMessage);
-        chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> ${botReply}</p>`;
+    function sendMessage() {
+        let userMessage = inputField.value.trim();
+        if (!userMessage) return;
+
+        chatWindow.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+        inputField.value = "";
         chatWindow.scrollTop = chatWindow.scrollHeight;
-    }, 1000);
-}
 
-function generateFakeReply(input) {
-    let responses = [
-        "Hmm... let me think about that.",
-        "Have you tried turning it off and on again?",
-        "I'm just a simple bot from 2002, can you rephrase?",
-        "Check the manual, maybe?",
-        "I don't have that information... yet!",
-        "Sounds like a you problem! Just kidding. :)"
-    ];
-    return responses[Math.floor(Math.random() * responses.length)];
-}
+        setTimeout(() => {
+            let botReply = generateFakeReply(userMessage);
+            chatWindow.innerHTML += `<p><strong>HelpBot 2002:</strong> ${botReply}</p>`;
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }, 1000);
+    }
+
+    function generateFakeReply(input) {
+        let responses = [
+            "Hmm... let me think about that.",
+            "Have you tried turning it off and on again?",
+            "I'm just a simple bot from 2002, can you rephrase?",
+            "Check the manual, maybe?",
+            "I don't have that information... yet!",
+            "Sounds like a you problem! Just kidding. :)",
+            "I'm still buffering... wait, do I even buffer?",
+            "Error 404: Useful response not found.",
+            "Let me consult my ancient knowledge... nope, nothing."
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+});
+
