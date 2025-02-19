@@ -199,6 +199,57 @@ button:hover {
     background: #005bb5;
 }
 
+#minesweeper-board {
+    border-collapse: collapse;
+}
+
+#minesweeper-board td {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #aaa;
+    text-align: center;
+    font-size: 18px;
+    line-height: 30px;
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+#minesweeper-board td.covered {
+    background: #ccc;
+}
+
+#minesweeper-board td.flagged {
+    background: #ff0;
+}
+
+#minesweeper-board td.mine {
+    background: #f00;
+    color: #fff;
+}
+
+#minesweeper-info {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#mines-left {
+    font-weight: bold;
+}
+
+#minesweeper-info button {
+    padding: 5px 10px;
+    background: #0078D7;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#minesweeper-info button:hover {
+    background: #005bb5;
+}
+
 #bsod {
     position: fixed;
     top: 0;
