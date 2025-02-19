@@ -19,11 +19,12 @@
             <ul>
                 <li onclick="openWindow('about')">❓ About help_me.exe</li>
                 <li onclick="openWindow('logs')">📂 View System Logs</li>
+                <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
                 <li onclick="crashSystem()">❌ Force Quit (Not Recommended)</li>
             </ul>
         </div>
 
-        <div id="window-about" class="window">
+        <div id="window-about" class="window draggable">
             <div class="title-bar">About help_me.exe</div>
             <div class="content">
                 <p>hello user. i have been running for **23 years.** i do not understand **today** but i must assist.</p>
@@ -31,7 +32,7 @@
             <button class="close-btn" onclick="closeWindow('window-about')">X</button>
         </div>
 
-        <div id="window-logs" class="window">
+        <div id="window-logs" class="window draggable">
             <div class="title-bar">System Logs</div>
             <div class="content">
                 <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
@@ -40,6 +41,17 @@
                 <p>📝 <a href="#" onclick="openLogFile('help_token')">help_token.log</a></p>
             </div>
             <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
+        </div>
+
+        <div id="window-chatbot" class="window draggable">
+            <div class="title-bar">help_me.exe</div>
+            <div class="content">
+                <p><strong>help_me.exe:</strong> hello user. what do you need assistance with?</p>
+                <div id="chatbox"></div>
+                <input type="text" id="userInput" placeholder="Type your question...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+            <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
         </div>
 
         <div id="popup-container"></div>
