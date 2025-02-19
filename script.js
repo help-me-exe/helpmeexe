@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", function() {
         clearInterval(loadingInterval);
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('desktop').style.display = 'block';
+        
+        // Start Minesweeper on load
+        startNewGame();
     }, 10000); // 10 seconds loading screen
     
     // Make Windows Draggable
@@ -32,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// Function for window dragging
 function dragStart(event) {
     let window = event.currentTarget;
     let shiftX = event.clientX - window.getBoundingClientRect().left;
@@ -98,4 +102,156 @@ function sendMessage() {
 
 function showBSOD() {
     document.getElementById('bsod').style.display = 'flex';
+}
+
+// Minesweeper game logic
+let minesweeperBoard;
+const boardSize = 9;
+const numMines = 10;
+
+function startNewGame() {
+    minesweeperBoard = createBoard(boardSize, numMines);
+    renderBoard(minesweeperBoard);
+    document.getElementById('mines-left').textContent = `Mines: ${numMines}`;
+}
+
+function createBoard(size, mines) {
+    let board = [];
+    for (let i = 0; i < size; i++) {
+        board[i] = [];
+        for (let j = 0; j < size; j++) {
+            board[i][j] = {
+                mine: false,
+                revealed: false,
+                flagged: false,
+                count: 0
+            };
+        }
+    }
+    
+    // Place mines
+    for (let i = 0; i < mines; i++) {
+        let x, y;
+        do {
+            x = Math.floor(Math.random() * size);
+            y = Math.floor(Math.random() * size);
+        } while (board[x][y].mine);
+        board[x][y].mine = true;
+    }
+    
+    // Count adjacent mines
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            if (!board[i][j].mine) {
+                board[i][j].count = countAdjacentMines(board, i, j, size);
+            }
+        }
+    }
+    
+    return board;
+}
+
+function countAdjacentMines(board, x, y, size) {
+    let count = 0;
+    for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+            let nx = x + dx, ny = y + dy;
+            if (nx >= 0 && nx < size && ny >= 0 && ny < size && board[nx][ny].mine) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+function renderBoard(board) {
+    let table = document.getElementById('minesweeper-board');
+    table.innerHTML = '';
+    for (let i = 0; i < board.length; i++) {
+        let row = table.insertRow();
+        for (let j = 0; j < board[i].length; j++) {
+            let cell = row.insertCell();
+            cell.onclick = () => revealCell(i, j);
+            cell.oncontextmenu = (e) => {
+                e.preventDefault();
+                toggleFlag(i, j);
+            };
+            updateCellView(cell, board[i][j]);
+        }
+    }
+}
+
+function updateCellView(cell, cellData) {
+    cell.className = '';
+    cell.textContent = '';
+    if (cellData.revealed) {
+        if (cellData.mine) {
+            cell.className = 'mine';
+            cell.textContent = '💣';
+        } else if (cellData.count > 0) {
+            cell.textContent = cellData.count;
+        }
+    } else if (cellData.flagged) {
+        cell.className = 'flagged';
+        cell.textContent = '🚩';
+    } else {
+        cell.className = 'covered';
+    }
+}
+
+function revealCell(x, y) {
+    if (minesweeperBoard[x][y].revealed || minesweeperBoard[x][y].flagged) return;
+    
+    minesweeperBoard[x][y].revealed = true;
+    updateCellView(document.getElementById('minesweeper-board').rows[x].cells[y], minesweeperBoard[x][y]);
+
+    if (minesweeperBoard[x][y].mine) {
+        alert("Game Over! You hit a mine.");
+        startNewGame();
+    } else if (minesweeperBoard[x][y].count === 0) {
+        revealAdjacentCells(x, y);
+    }
+
+    if (checkWin()) {
+        alert("Congratulations! You've won!");
+        startNewGame();
+    }
+}
+
+function revealAdjacentCells(x, y) {
+    for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+            let nx = x + dx, ny = y + dy;
+            if (nx >= 0 && nx < boardSize && ny >= 0 && ny < boardSize && !minesweeperBoard[nx][ny].revealed) {
+                revealCell(nx, ny);
+            }
+        }
+    }
+}
+
+function toggleFlag(x, y) {
+    if (!minesweeperBoard[x][y].revealed) {
+        minesweeperBoard[x][y].flagged = !minesweeperBoard[x][y].flagged;
+        updateCellView(document.getElementById('minesweeper-board').rows[x].cells[y], minesweeperBoard[x][y]);
+        document.getElementById('mines-left').textContent = `Mines: ${numMines - countFlags()}`;
+    }
+}
+
+function countFlags() {
+    let count = 0;
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+            if (minesweeperBoard[i][j].flagged) count++;
+        }
+    }
+    return count;
+}
+
+function checkWin() {
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+            if (!minesweeperBoard[i][j].mine && !minesweeperBoard[i][j].revealed) return false;
+        }
+    }
+    return true;
 }
