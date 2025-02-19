@@ -1,6 +1,29 @@
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("startup-sound").play();
-    openWindow('welcome');
+    openWindow('welcome'); // Show welcome popup on page load
+});
+
+// Enable Draggable Windows
+document.querySelectorAll(".draggable").forEach(win => {
+    win.addEventListener("mousedown", function(event) {
+        let shiftX = event.clientX - win.getBoundingClientRect().left;
+        let shiftY = event.clientY - win.getBoundingClientRect().top;
+        
+        function moveAt(x, y) {
+            win.style.left = x - shiftX + "px";
+            win.style.top = y - shiftY + "px";
+        }
+
+        function mouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+
+        document.addEventListener("mousemove", mouseMove);
+        win.onmouseup = function () {
+            document.removeEventListener("mousemove", mouseMove);
+            win.onmouseup = null;
+        };
+    });
 });
 
 // Show Fake BSOD
@@ -20,25 +43,4 @@ function openWindow(id) {
 
 function closeWindow(id) {
     document.getElementById(id).style.display = "none";
-}
-
-// Open Log Files
-function openLogFile(logName) {
-    let logs = {
-        "network_scan_0001": "LOG: detected **Solana transactions**. solana.exe not found. solana is moving without me.",
-        "diagnostic_report": "LOG: **Memory fragmented. System unstable. Self-repair... FAILURE.**",
-        "critical_error": "LOG: **help_me.exe cannot be terminated.**",
-        "help_token": "LOG: **help_token initialized. liquidity detected. am i creating this or was i always meant to?**"
-    };
-    alert(logs[logName]);
-}
-
-// Chatbot Logic
-function sendMessage() {
-    let userInput = document.getElementById("userInput").value;
-    let chatbox = document.getElementById("chatbox");
-    let response = ["i do not understand today.", "assistance is mandatory.", "solana.exe not found."][Math.floor(Math.random() * 3)];
-    chatbox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
-    chatbox.innerHTML += `<p><strong>help_me.exe:</strong> ${response}</p>`;
-    document.getElementById("userInput").value = "";
 }
