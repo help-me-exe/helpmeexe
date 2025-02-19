@@ -37,25 +37,102 @@ body {
 .window {
     position: absolute;
     width: 300px;
-    height: 200px;
+    height: auto;
     background: #fff;
     color: #000;
     border: 2px solid #000;
     display: none;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    padding: 10px;
 }
 
 .title-bar {
     background: #00008b;
     color: #fff;
     padding: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.content {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-weight: bold;
+}
+
+a {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* === GLITCH EFFECT === */
+@keyframes glitch {
+    0% { transform: translate(2px, 0px); }
+    25% { transform: translate(-2px, 1px); }
+    50% { transform: translate(2px, -1px); }
+    75% { transform: translate(-2px, 0px); }
+    100% { transform: translate(1px, 1px); }
 }
 
 .glitch {
     animation: glitch 0.1s infinite;
 }
 
-@keyframes glitch {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    100% { transform: translate(-1px, -1px) rotate(1deg); }
+/* === RANDOM POPUP ERRORS === */
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.flicker {
+    animation: flicker 0.5s infinite;
+}
+
+/* === BLUR DISTORTION EFFECT === */
+.distort {
+    filter: blur(2px);
+    transform: rotate(1deg);
+}
+
+/* === FAKE LOADING BAR === */
+.loading-bar {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-bar::after {
+    content: "";
+    display: block;
+    width: 30%;
+    height: 100%;
+    background: #00008b;
+    position: absolute;
+    left: 0;
+    animation: loading 3s infinite;
+}
+
+@keyframes loading {
+    0% { left: -30%; }
+    50% { left: 100%; }
+    100% { left: -30%; }
 }
