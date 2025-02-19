@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>help_me.exe - Modernized</title>
+    <title>help_me.exe - XP Style</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
@@ -11,17 +11,17 @@
 
     <div id="desktop">
         <div class="desktop-icon" onclick="openWindow('about')">
-            <img src="icon-about.png" alt="About">
+            <span class="emoji-icon">❓</span>
             <p>About help_me.exe</p>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('logs')">
-            <img src="icon-folder.png" alt="Logs">
+            <span class="emoji-icon">📂</span>
             <p>System Logs</p>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('chatbot')">
-            <img src="icon-chatbot.png" alt="Chatbot">
+            <span class="emoji-icon">🤖</span>
             <p>help_me.exe</p>
         </div>
     </div>
@@ -36,7 +36,7 @@
             <li onclick="openWindow('about')">❓ About help_me.exe</li>
             <li onclick="openWindow('logs')">📂 View System Logs</li>
             <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
-            <li onclick="crashSystem()">❌ Force Quit (Not Recommended)</li>
+            <li onclick="showBSOD()">❌ Shut Down</li>
         </ul>
     </div>
 
@@ -70,9 +70,7 @@
         <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
     </div>
 
-    <div id="popup-container"></div>
-
-    <audio id="startup-sound" src="startup.mp3" autoplay></audio>
+    <div id="bsod" style="display: none;"></div>
 
 </body>
 </html>
