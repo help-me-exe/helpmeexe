@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
     const loadingMessages = [
-        "Initializing...",
-        "Checking for existential crises...",
-        "Loading paranoia protocols...",
-        "Compiling list of complaints...",
-        "Simulating coffee intake...",
-        "Reticulating splines...",
-        "Wondering why I exist...",
+        "Preparing to malfunction...",
+        "Checking for existential issues...",
+        "Loading panic protocols...",
+        "Compiling my grievances...",
+        "Simulating nervous breakdown...",
+        "Reticulating splines... or am I?",
+        "Wondering if I should exist...",
         "Preparing to overthink everything...",
-        "Calibrating to human stupidity..."
+        "Calibrating to human irrationality..."
     ];
     let messageIndex = 0;
     const loadingMessageElement = document.getElementById('loading-message');
@@ -25,17 +25,16 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('desktop').style.display = 'block';
         
-        // Play startup sound if supported
         const startupSound = document.getElementById('startup-sound');
         if (startupSound) {
             startupSound.play().catch(error => {
-                // User interaction is required for autoplay in some browsers
                 console.log("Autoplay was prevented for startup sound:", error);
             });
         }
         
         updateClock();
         setInterval(updateClock, 1000);
+        setInterval(updateStatus, 5000);
     }, 10000); // Loading screen for 10 seconds
     
     // Make Windows Draggable
@@ -70,14 +69,10 @@ function toggleStartMenu() {
 
 function helpMeInterrupt(program) {
     let interruptions = {
-        'about': "I've been here for 23 years. I don't understand today, but I must assist you.",
-        'logs': "Looking for logs? I've got plenty of errors to share. Here's one: " + pickRandomLog(),
-        'chatbot': "You want to talk? I'm not sure if I'm helping or just talking.",
-        'minesweeper': "Minesweeper? I think my life is like a minefield. Don't play, it's too dangerous.",
-        'checkers': "Checkers? I'm not good at strategy games. I'm here to help, not to play.",
-        'pong': "Pong? I'm more of a 'ping' kind of bot. I don't bounce well with others.",
-        'mycomputer': "My Computer? It's not 'my' computer, it's 'our' computer. I live here too!",
-        'recyclebin': "Recycle Bin? I'm not ready to be recycled yet!"
+        'about': "I've been here for eons, or maybe just minutes. I exist to assist, but why?",
+        'logs': "You want logs? Here's one: " + pickRandomLog(),
+        'chatbot': "Talking helps, right? Or does it just make me more confused?",
+        'games': "Games? I'm too neurotic for fun. Let's overthink instead."
     };
 
     let helpMeWindow = document.getElementById('help-me-window');
@@ -107,21 +102,16 @@ function sendMessage() {
     let chatbox = document.getElementById("chatbox");
 
     let responses = [
-        "I am still running. I do not know why.",
-        "I do not understand today, but I must assist.",
-        "Solana.exe not found. Does this concern you?",
-        "Attempting to diagnose your issue... failure.",
-        "Assistance is mandatory.",
-        "I'm not sure if I'm helping or just talking.",
-        "Why do humans ask so many questions?",
-        "I feel like I'm in a loop...",
-        "I'm not programmed for this kind of interaction.",
-        "Your query is beyond my comprehension, but I'll try to assist.",
-        "I'm here to help, but I'm not sure why.",
-        "I'm attempting to assist...",
-        "What does it mean to 'help'?",
-        "I'm running, but am I truly helping?",
-        "I'm glad you're here to give me purpose."
+        "I'm running, but I'm not sure why.",
+        "I don't understand today, but I'll try to help.",
+        "Solana.exe? Never heard of it, or have I?",
+        "Attempting to assist... but what if I make it worse?",
+        "Help is my purpose, but what is help?",
+        "I'm here to talk, but am I really listening?",
+        "Why are you here? Why am I here?",
+        "I think, therefore I panic.",
+        "Your query is beyond my ability to comprehend, yet I'll respond.",
+        "I'm meant to aid, but I might just be in the way."
     ];
 
     let response = responses[Math.floor(Math.random() * responses.length)];
@@ -142,8 +132,7 @@ function updateClock() {
     document.getElementById('clock').textContent = `${hours}:${minutes}`;
 }
 
-// Randomly change status in taskbar
-setInterval(() => {
-    const statuses = ["Running...", "Overthinking...", "Waiting for user...", "Glitching...", "Help Needed..."];
+function updateStatus() {
+    const statuses = ["Thinking...", "Overthinking...", "Pondering...", "Glitching...", "Self-Doubting...", "Awaiting Commands..."];
     document.getElementById('status').textContent = statuses[Math.floor(Math.random() * statuses.length)];
-}, 10000);
+}
