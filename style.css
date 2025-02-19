@@ -1,3 +1,27 @@
+/* Draggable Windows */
+.window {
+    position: absolute;
+    background: #fff;
+    border: 2px solid #000;
+    display: none;
+    width: 350px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    top: 50px;
+    left: 50px;
+    cursor: move;
+}
+
+/* Title Bar */
+.title-bar {
+    background: #00008b;
+    color: #fff;
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+    cursor: move;
+}
+
 /* Close Button */
 .close-btn {
     background: none;
@@ -13,47 +37,4 @@
 
 .close-btn:hover {
     color: red;
-}
-
-/* Fake BSOD */
-#bsod {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #0000AA;
-    color: #fff;
-    font-family: "Courier New", monospace;
-    display: none;
-    text-align: center;
-    padding-top: 15%;
-}
-
-#bsod h1 {
-    font-size: 28px;
-}
-
-#bsod p {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-/* Blinking Restart Button */
-@keyframes blink {
-    50% { opacity: 0.5; }
-}
-
-#restart-btn {
-    background: #fff;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    animation: blink 1s infinite;
-}
-
-#restart-btn:hover {
-    background: #ccc;
 }
