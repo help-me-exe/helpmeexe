@@ -13,18 +13,22 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
-    color: #00FF00;
+    background: #000080;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-.loader pre {
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    white-space: pre-wrap;
+.loader {
+    text-align: center;
+}
+
+.loader h1 {
+    font-size: 48px;
+    text-shadow: 0 0 5px #000;
+    color: #008080;
 }
 
 #desktop {
@@ -145,75 +149,6 @@ body {
     border: none;
     cursor: pointer;
     padding: 5px;
-    font-weight: bold;
-}
-
-#chatbox {
-    background: #ddd;
-    height: 200px;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #000;
-    margin-bottom: 10px;
-    color: #000;
-}
-
-#userInput {
-    width: 80%;
-    padding: 6px;
-    border: 1px solid #000;
-    font-size: 14px;
-}
-
-button {
-    padding: 6px 15px;
-    background: #0078D7;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-button:hover {
-    background: #005bb5;
-}
-
-#minesweeper-board {
-    border-collapse: collapse;
-}
-
-#minesweeper-board td {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #aaa;
-    text-align: center;
-    font-size: 18px;
-    line-height: 30px;
-    background: #f0f0f0;
-    cursor: pointer;
-}
-
-#minesweeper-board td.covered {
-    background: #ccc;
-}
-
-#minesweeper-board td.flagged {
-    background: #ff0;
-}
-
-#minesweeper-board td.mine {
-    background: #f00;
-    color: #fff;
-}
-
-#minesweeper-info {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#mines-left {
     font-weight: bold;
 }
 
