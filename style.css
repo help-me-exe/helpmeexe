@@ -54,11 +54,6 @@ body {
     text-align: center;
 }
 
-.content {
-    padding: 10px;
-    font-size: 14px;
-}
-
 .close-btn {
     position: absolute;
     top: 5px;
@@ -69,70 +64,4 @@ body {
     cursor: pointer;
     padding: 5px;
     font-weight: bold;
-}
-
-a {
-    color: blue;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-/* === GLITCH EFFECT === */
-@keyframes glitch {
-    0% { transform: translate(2px, 0px); }
-    25% { transform: translate(-2px, 1px); }
-    50% { transform: translate(2px, -1px); }
-    75% { transform: translate(-2px, 0px); }
-    100% { transform: translate(1px, 1px); }
-}
-
-.glitch {
-    animation: glitch 0.1s infinite;
-}
-
-/* === RANDOM POPUP ERRORS === */
-@keyframes flicker {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-
-.flicker {
-    animation: flicker 0.5s infinite;
-}
-
-/* === BLUR DISTORTION EFFECT === */
-.distort {
-    filter: blur(2px);
-    transform: rotate(1deg);
-}
-
-/* === FAKE LOADING BAR === */
-.loading-bar {
-    width: 100%;
-    height: 5px;
-    background: #ddd;
-    position: relative;
-    overflow: hidden;
-}
-
-.loading-bar::after {
-    content: "";
-    display: block;
-    width: 30%;
-    height: 100%;
-    background: #00008b;
-    position: absolute;
-    left: 0;
-    animation: loading 3s infinite;
-}
-
-@keyframes loading {
-    0% { left: -30%; }
-    50% { left: 100%; }
-    100% { left: -30%; }
 }
