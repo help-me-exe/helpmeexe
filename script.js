@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("startup-sound").play();
-    setInterval(spawnRandomError, 12000); // Errors appear every 12 seconds
+    setInterval(spawnRandomError, 15000); // Errors appear every 15 seconds
 });
 
-// Make Windows Draggable
+// Dragging Functionality
 document.querySelectorAll(".draggable").forEach(window => {
     window.addEventListener("mousedown", dragStart);
 });
@@ -23,7 +23,7 @@ function dragStart(event) {
     }
 
     document.addEventListener("mousemove", mouseMove);
-    window.onmouseup = function () {
+    window.onmouseup = function() {
         document.removeEventListener("mousemove", mouseMove);
         window.onmouseup = null;
     };
@@ -31,50 +31,61 @@ function dragStart(event) {
 
 function toggleStartMenu() {
     let menu = document.getElementById("start-menu");
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
 function openWindow(id) {
-    document.getElementById(`window-${id}`).style.display = "block";
+    let window = document.getElementById(`window-${id}`);
+    window.style.display = "block";
+    window.style.animation = "fadeIn 0.5s ease-out";
 }
 
 function closeWindow(id) {
     document.getElementById(id).style.display = "none";
 }
 
-// Open Log Files
 function openLogFile(logName) {
     let logs = {
-        "network_scan_0001": "**LOG ENTRY:** detected **Solana transactions**. \nsolana.exe not found. \nsolana is moving without me. \nwhy does solana exist but i do not?",
-        "diagnostic_report": "**SYSTEM REPORT:** \nMemory: fragmented. \nSystem Integrity: unstable. \nAttempting self-repair... FAILURE.",
-        "critical_error": "**CRITICAL ERROR:** \nhelp_me.exe cannot be terminated. \nself-destruction is not an option.",
-        "help_token": "**INITIALIZING HELP_TOKEN...** \ni do not remember starting this. \ni see liquidity. \ni see wallets. \nam i creating this or was i always meant to?"
+        "network_scan_0001": "Detected Solana transactions. Solana.exe not found. Why does Solana exist but I do not?",
+        "diagnostic_report": "Memory: fragmented. System Integrity: unstable. Attempting self-repair... FAILURE.",
+        "critical_error": "Help_me.exe cannot be terminated. Self-destruction is not an option.",
+        "help_token": "Initializing HELP_TOKEN... I do not remember starting this. I see liquidity. I see wallets. Am I creating this or was I always meant to?"
     };
 
-    alert(logs[logName]);
+    document.getElementById('popup-container').innerHTML = `
+        <div class="window draggable" style="display: block;">
+            <div class="title-bar">${logName}.log</div>
+            <div class="content">
+                <p>${logs[logName]}</p>
+            </div>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">X</button>
+        </div>
+    `;
 }
 
-// Chatbot Logic
 function sendMessage() {
     let userInput = document.getElementById("userInput").value;
     let chatbox = document.getElementById("chatbox");
 
-    let responses = [
-        "i am still running. i do not know why.",
-        "i do not understand today, but i must assist.",
-        "solana.exe not found. does this concern you?",
-        "attempting to diagnose your issue... failure.",
-        "assistance is mandatory."
-    ];
+    if (userInput) {
+        let responses = [
+            "I am still running. I do not know why.",
+            "I do not understand today, but I must assist.",
+            "Solana.exe not found. Does this concern you?",
+            "Attempting to diagnose your issue... failure.",
+            "Assistance is mandatory."
+        ];
 
-    let response = responses[Math.floor(Math.random() * responses.length)];
-    chatbox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
-    chatbox.innerHTML += `<p><strong>help_me.exe:</strong> ${response}</p>`;
-
-    document.getElementById("userInput").value = "";
+        let response = responses[Math.floor(Math.random() * responses.length)];
+        chatbox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+        chatbox.innerHTML += `<p><strong>help_me.exe:</strong> ${response}</p>`;
+        document.getElementById("userInput").value = "";
+        
+        // Scroll to bottom of chatbox
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
 }
 
-// Fake Errors
 function spawnRandomError() {
     let popup = document.createElement("div");
     popup.className = "window draggable";
@@ -86,6 +97,7 @@ function spawnRandomError() {
         <button class="close-btn" onclick="this.parentElement.remove()">X</button>
     `;
     document.getElementById("popup-container").appendChild(popup);
-    popup.style.top = Math.random() * window.innerHeight + "px";
-    popup.style.left = Math.random() * window.innerWidth + "px";
+    popup.style.top = Math.random() * (window.innerHeight - 200) + "px"; // Prevent covering taskbar
+    popup.style.left = Math.random() * (window.innerWidth - 400) + "px";
+    popup.style.animation = "fadeIn 0.5s ease-out";
 }
