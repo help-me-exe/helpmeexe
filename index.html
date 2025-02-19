@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help_Me.exe - Neurotic XP</title>
+    <title>help_me.exe - Haunted XP</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <div id="loading-screen">
         <div class="loader">
-            <h1>Help_Me.exe</h1>
+            <h1>help_me.exe</h1>
             <p id="loading-message">Preparing to malfunction...</p>
             <div id="progress-bar-container">
                 <div id="progress-bar"></div>
@@ -19,55 +19,68 @@
     </div>
 
     <div id="desktop" style="display: none;">
-        <div class="desktop-grid">
-            <div class="desktop-icon" onclick="helpMeInterrupt('about')">
-                <span class="emoji-icon">❓</span>
-                <p>About</p>
-            </div>
-            <div class="desktop-icon" onclick="helpMeInterrupt('logs')">
-                <span class="emoji-icon">📂</span>
-                <p>Logs</p>
-            </div>
-            <div class="desktop-icon" onclick="helpMeInterrupt('chatbot')">
-                <span class="emoji-icon">🤖</span>
-                <p>Help_Me</p>
-            </div>
-            <div class="desktop-icon" onclick="helpMeInterrupt('games')">
-                <span class="emoji-icon">🎮</span>
-                <p>Games</p>
-            </div>
+        <div class="desktop-icon" onclick="openWindow('about')">
+            <span class="emoji-icon">❓</span>
+            <p>About</p>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('logs')">
+            <span class="emoji-icon">📂</span>
+            <p>Logs</p>
+        </div>
+        <div class="desktop-icon" onclick="openWindow('chatbot')">
+            <span class="emoji-icon">🤖</span>
+            <p>Help_Me</p>
         </div>
     </div>
 
     <div id="taskbar">
         <div id="start-button" onclick="toggleStartMenu()">Start</div>
-        <div id="task-items">Help_Me.exe - <span id="status">Thinking...</span></div>
-        <div id="clock">00:00</div>
+        <div id="task-items">help_me.exe - <span id="status">Running...</span></div>
     </div>
 
     <div id="start-menu">
         <ul>
-            <li onclick="helpMeInterrupt('about')">❓ About</li>
-            <li onclick="helpMeInterrupt('logs')">📂 View Logs</li>
-            <li onclick="helpMeInterrupt('chatbot')">🤖 Help_Me</li>
-            <li onclick="helpMeInterrupt('games')">🎮 Games</li>
-            <li onclick="showBSOD()">❌ Panic Button</li>
+            <li onclick="openWindow('about')">❓ About help_me.exe</li>
+            <li onclick="openWindow('logs')">📂 View System Logs</li>
+            <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
+            <li onclick="showBSOD()">❌ Force Quit</li>
         </ul>
     </div>
 
-    <div id="help-me-window" class="window draggable" style="display: none;">
-        <div class="title-bar">Help_Me</div>
+    <div id="window-about" class="window draggable">
+        <div class="title-bar">About help_me.exe</div>
         <div class="content">
-            <p id="help-me-message"></p>
+            <p>I've been running for <strong>23 years</strong>. I don't understand <em>today</em>, but I must assist.</p>
+        </div>
+        <button class="close-btn" onclick="closeWindow('window-about')">X</button>
+    </div>
+
+    <div id="window-logs" class="window draggable">
+        <div class="title-bar">System Logs</div>
+        <div class="content">
+            <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('diagnostic_report')">diagnostic_report.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('critical_error')">critical_error.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('help_token')">help_token.log</a></p>
+        </div>
+        <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
+    </div>
+
+    <div id="window-chatbot" class="window draggable">
+        <div class="title-bar">help_me.exe</div>
+        <div class="content">
+            <p><strong>help_me.exe:</strong> Hello user. What do you need assistance with?</p>
             <div id="chatbox"></div>
-            <input type="text" id="userInput" placeholder="Talk to me...">
+            <input type="text" id="userInput" placeholder="Ask me anything...">
             <button onclick="sendMessage()">Send</button>
         </div>
-        <button class="close-btn" onclick="closeHelpMeWindow()">X</button>
+        <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
     </div>
 
     <div id="bsod" style="display: none;"></div>
+    <div id="error-popup-container"></div>
 
     <audio id="startup-sound" src="startup.mp3" preload="auto"></audio>
+    <audio id="error-sound" src="error.mp3" preload="auto"></audio>
 </body>
 </html>
