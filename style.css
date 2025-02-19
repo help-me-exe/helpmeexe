@@ -1,8 +1,8 @@
 body {
-    background: url('xp-bg.jpg') no-repeat center center fixed;
+    background: url('vintage-ibm-bg.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #000;
-    font-family: 'Tahoma', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     margin: 0;
     overflow: hidden;
 }
@@ -13,8 +13,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000080;
-    color: #fff;
+    background: #000;
+    color: #0f0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,21 +28,21 @@ body {
 .loader h1 {
     font-size: 48px;
     text-shadow: 0 0 5px #000;
-    color: #008080;
+    color: #0f0;
 }
 
 #progress-bar-container {
     width: 300px;
     height: 20px;
-    background: #ccc;
+    background: #000;
     margin: 20px auto;
-    border: 1px solid #888;
+    border: 1px solid #0f0;
 }
 
 #progress-bar {
     width: 0;
     height: 100%;
-    background: #0078D7;
+    background: #0f0;
     transition: width 0.5s ease-in-out;
 }
 
@@ -62,8 +62,8 @@ body {
     bottom: 0;
     width: 100%;
     height: 40px;
-    background: #00008b;
-    color: #fff;
+    background: #000;
+    color: #0f0;
     display: flex;
     align-items: center;
     padding: 0 10px;
@@ -71,29 +71,29 @@ body {
 }
 
 #start-button {
-    background: #0078D7;
+    background: #0f0;
+    color: #000;
     padding: 6px 15px;
-    border-radius: 3px;
+    border-radius: 0;
     cursor: pointer;
     font-weight: bold;
-    color: #fff;
     border: none;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 #start-button:hover {
-    background: #005bb5;
+    background: #00ff00;
 }
 
 #start-menu {
     position: absolute;
-    bottom: 50px;
+    bottom: 40px;
     left: 10px;
-    background: #c0c0c0;
-    border: 2px solid #000;
+    background: #000;
+    border: 1px solid #0f0;
     padding: 10px;
     display: none;
     width: 200px;
+    color: #0f0;
 }
 
 #start-menu ul {
@@ -105,21 +105,19 @@ body {
 #start-menu li {
     padding: 8px;
     cursor: pointer;
-    background: #fff;
+    background: #000;
     margin-bottom: 3px;
-    font-weight: bold;
     font-size: 14px;
-    border-radius: 3px;
 }
 
 #start-menu li:hover {
-    background: #ddd;
+    background: #333;
 }
 
 .desktop-icon {
     width: 120px;
     text-align: center;
-    color: #000;
+    color: #0f0;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
@@ -135,11 +133,10 @@ body {
 .window {
     position: absolute;
     width: 400px;
-    background: #fff;
-    color: #000;
-    border: 2px solid #000;
+    background: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
     display: none;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
     padding: 10px;
     top: 50px;
     left: 50px;
@@ -147,8 +144,8 @@ body {
 }
 
 .title-bar {
-    background: #00008b;
-    color: #fff;
+    background: #000;
+    color: #0f0;
     padding: 5px;
     font-weight: bold;
     text-align: center;
@@ -159,12 +156,43 @@ body {
     position: absolute;
     top: 5px;
     right: 5px;
-    background: red;
-    color: #fff;
+    background: #f00;
+    color: #000;
     border: none;
     cursor: pointer;
     padding: 5px;
     font-weight: bold;
+}
+
+#chatbox {
+    background: #000;
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #0f0;
+    margin-bottom: 10px;
+    color: #0f0;
+}
+
+#userInput {
+    width: 80%;
+    padding: 6px;
+    border: 1px solid #0f0;
+    background: #000;
+    color: #0f0;
+    font-size: 14px;
+}
+
+button {
+    padding: 6px 15px;
+    background: #0f0;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #00ff00;
 }
 
 #minesweeper-board {
@@ -174,25 +202,27 @@ body {
 #minesweeper-board td {
     width: 30px;
     height: 30px;
-    border: 1px solid #aaa;
+    border: 1px solid #0f0;
     text-align: center;
     font-size: 18px;
     line-height: 30px;
-    background: #f0f0f0;
+    background: #000;
+    color: #0f0;
     cursor: pointer;
 }
 
 #minesweeper-board td.covered {
-    background: #ccc;
+    background: #333;
 }
 
 #minesweeper-board td.flagged {
     background: #ff0;
+    color: #000;
 }
 
 #minesweeper-board td.mine {
     background: #f00;
-    color: #fff;
+    color: #000;
 }
 
 #minesweeper-info {
@@ -212,8 +242,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000080;
-    color: #fff;
+    background: #000;
+    color: #0f0;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
     justify-content: center;
@@ -223,7 +253,7 @@ body {
 }
 
 #bsod::before {
-    content: "A problem has been detected and Windows has been shut down to prevent damage to your computer.\n\nHELP_ME.EXE 404\n\nIf this is the first time you've seen this Stop error screen, restart your computer. If this screen appears again, follow these steps:\n\nCheck to make sure any new hardware or software is properly installed. If this is a new installation, ask your hardware or software manufacturer for any Windows updates you might need.\n\nIf problems continue, disable or remove any newly installed hardware or software. Disable BIOS memory options such as caching or shadowing. If you need to use Safe Mode to remove or disable components, restart your computer, press F8 to select Advanced Startup Options, and then select Safe Mode.\n\nTechnical information:\n\n*** STOP: 0x000000404 (0x00000001, 0x00000002, 0x00000003, 0x00000004)\n\nHELP_ME.EXE - Address 0xFFFFFFF4 base at 0xFFFFF800, DateStamp 0x00000000";
+    content: "SYSTEM HALTED. HELP_ME.EXE ERROR 404\n\nIf this is your first encounter with this system failure, reboot your machine. If the problem persists, follow these steps:\n\nEnsure all hardware and software installations are correct. If this is a new setup, check for system updates.\n\nIf issues persist, uninstall recent hardware/software additions. Disable memory caching in BIOS settings if possible. For further troubleshooting, reboot in Safe Mode.\n\nTechnical Information:\n\n*** ERROR: 0x000000404 (0x00000001, 0x00000002, 0x00000003, 0x00000004)\n\nHELP_ME.EXE - Address 0xFFFFFFF4 base at 0xFFFFF800, DateStamp 0x00000000";
     white-space: pre-wrap;
     text-align: left;
     padding: 20px;
