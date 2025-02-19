@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>help_me.exe - XP Style</title>
+    <title>help_me.exe - Neurotic XP</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
@@ -16,33 +16,30 @@
     </div>
 
     <div id="desktop" style="display: none;">
-        <div class="desktop-icon" onclick="openWindow('about')">
+        <div class="desktop-icon glitch" onclick="openWindow('about')">
             <span class="emoji-icon">❓</span>
             <p>About help_me.exe</p>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('logs')">
+        <div class="desktop-icon glitch" onclick="openWindow('logs')">
             <span class="emoji-icon">📂</span>
             <p>System Logs</p>
         </div>
 
-         <div id="desktop" style="display: none;">
-        <!-- ... (previous desktop icons) ... -->
-        <div class="desktop-icon" onclick="openWindow('minesweeper')">
+        <div class="desktop-icon glitch" onclick="openWindow('chatbot')">
+            <span class="emoji-icon">🤖</span>
+            <p>help_me.exe</p>
+        </div>
+
+        <div class="desktop-icon glitch" onclick="openWindow('minesweeper')">
             <span class="emoji-icon">💣</span>
             <p>Minesweeper</p>
         </div>
     </div>
 
-        <div class="desktop-icon" onclick="openWindow('chatbot')">
-            <span class="emoji-icon">🤖</span>
-            <p>help_me.exe</p>
-        </div>
-    </div>
-
     <div id="taskbar">
         <div id="start-button" onclick="toggleStartMenu()">Start</div>
-        <div id="task-items">help_me.exe - Running...</div>
+        <div id="task-items">help_me.exe - <span id="task-status">Running...</span></div>
     </div>
 
     <div id="start-menu">
@@ -50,11 +47,12 @@
             <li onclick="openWindow('about')">❓ About help_me.exe</li>
             <li onclick="openWindow('logs')">📂 View System Logs</li>
             <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
-            <li onclick="showBSOD()">❌ Shut Down</li>
+            <li onclick="openWindow('minesweeper')">💣 Minesweeper</li>
+            <li onclick="showBSOD()">❌ Crash System</li>
         </ul>
     </div>
 
-    <div id="window-about" class="window draggable">
+    <div id="window-about" class="window draggable glitch">
         <div class="title-bar">About help_me.exe</div>
         <div class="content">
             <p>hello user. i have been running for <strong>23 years.</strong> i do not understand <strong>today</strong> but i must assist.</p>
@@ -62,7 +60,7 @@
         <button class="close-btn" onclick="closeWindow('window-about')">X</button>
     </div>
 
-    <div id="window-logs" class="window draggable">
+    <div id="window-logs" class="window draggable glitch">
         <div class="title-bar">System Logs</div>
         <div class="content">
             <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
@@ -73,22 +71,7 @@
         <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
     </div>
 
-    
-    <div id="window-minesweeper" class="window draggable" style="display:none;">
-        <div class="title-bar">Minesweeper</div>
-        <div class="content">
-            <div id="minesweeper-game">
-                <table id="minesweeper-board"></table>
-                <div id="minesweeper-info">
-                    <span id="mines-left">Mines: 10</span>
-                    <button onclick="startNewGame()">New Game</button>
-                </div>
-            </div>
-        </div>
-        <button class="close-btn" onclick="closeWindow('window-minesweeper')">X</button>
-    </div>
-
-    <div id="window-chatbot" class="window draggable">
+    <div id="window-chatbot" class="window draggable glitch">
         <div class="title-bar">help_me.exe</div>
         <div class="content">
             <p><strong>help_me.exe:</strong> hello user. what do you need assistance with?</p>
@@ -97,6 +80,20 @@
             <button onclick="sendMessage()">Send</button>
         </div>
         <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
+    </div>
+
+    <div id="window-minesweeper" class="window draggable glitch" style="display:none;">
+        <div class="title-bar">Neurotic Minesweeper</div>
+        <div class="content">
+            <div id="minesweeper-game">
+                <table id="minesweeper-board"></table>
+                <div id="minesweeper-info">
+                    <span id="mines-left">Mines: 10</span>
+                    <button onclick="startNewGame()">Restart Game</button>
+                </div>
+            </div>
+        </div>
+        <button class="close-btn" onclick="closeWindow('window-minesweeper')">X</button>
     </div>
 
     <div id="bsod" style="display: none;"></div>
