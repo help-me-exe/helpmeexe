@@ -18,6 +18,34 @@ body {
     padding: 20px;
 }
 
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: #00FF00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loader {
+    text-align: center;
+}
+
+.loader h1 {
+    font-size: 48px;
+    text-shadow: 0 0 10px #00FF00;
+}
+
+.loading-message {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
 #taskbar {
     position: fixed;
     bottom: 0;
@@ -101,31 +129,40 @@ body {
     border: 2px solid #000;
     display: none;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-    padding: 10px;
+    padding: 15px;
     top: 50px;
     left: 50px;
     cursor: move;
+    border-radius: 10px;
 }
 
 .title-bar {
-    background: #00008b;
+    background: linear-gradient(to right, #0078D7, #005bb5);
     color: #fff;
-    padding: 5px;
+    padding: 10px;
     font-weight: bold;
     text-align: center;
+    border-radius: 5px 5px 0 0;
     cursor: move;
 }
 
 .close-btn {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background: red;
+    top: 10px;
+    right: 10px;
+    background: #FF0000;
     color: #fff;
     border: none;
     cursor: pointer;
-    padding: 5px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
     font-weight: bold;
+    font-size: 16px;
+}
+
+.close-btn:hover {
+    background: #990000;
 }
 
 #chatbox {
@@ -136,6 +173,7 @@ body {
     border: 1px solid #000;
     margin-bottom: 10px;
     color: #000;
+    border-radius: 5px;
 }
 
 #userInput {
@@ -143,15 +181,18 @@ body {
     padding: 6px;
     border: 1px solid #000;
     font-size: 14px;
+    border-radius: 5px;
 }
 
 button {
-    padding: 6px;
+    padding: 6px 15px;
     background: #0078D7;
     color: #fff;
     border: none;
     cursor: pointer;
     font-size: 14px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
 }
 
 button:hover {
