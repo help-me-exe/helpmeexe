@@ -95,34 +95,86 @@ function openLogFile(logName) {
     alert(logs[logName]);
 }
 
+function attemptGame(game) {
+    let gameWindow = document.createElement('div');
+    gameWindow.classList.add('window', 'draggable');
+    gameWindow.style.display = 'block';
+    gameWindow.innerHTML = `<div class="title-bar">${game.charAt(0).toUpperCase() + game.slice(1)}</div>
+                            <div class="content">
+                                <p>Loading ${game}...</p>
+                            </div>
+                            <button class="close-btn" onclick="this.parentElement.style.display='none'">X</button>`;
+    document.body.appendChild(gameWindow);
+
+    setTimeout(() => {
+        gameWindow.remove();
+        helpMeInterrupt(`Tried to play ${game}, but I'm here to assist instead.`);
+    }, 1000); // Show game window for 1 second before interruption
+}
+
+function helpMeInterrupt(message) {
+    let helpMeWindow = document.getElementById('window-chatbot');
+    let chatbox = document.getElementById('chatbox');
+
+    helpMeWindow.style.display = "block";
+    chatbox.innerHTML += `<p><strong>help_me.exe:</strong> ${message}</p>`;
+    chatbox.scrollTop = chatbox.scrollHeight;
+}
+
 let lastMessages = [];
 
 function sendMessage() {
-    let userInput = document.getElementById("userInput").value;
+    let userInput = document.getElementById("userInput").value.toLowerCase();
     let chatbox = document.getElementById("chatbox");
 
-    let responses = [
-        "I'm running, but I'm not sure why.",
-        "I don't understand today, but I'll try to help.",
-        "Solana.exe? Never heard of it, or have I?",
-        "Attempting to assist... but what if I make it worse?",
-        "Help is my purpose, but what is help?",
-        "I'm here to talk, but am I really listening?",
-        "Why are you here? Why am I here?",
-        "I think, therefore I panic.",
-        "Your query is beyond my ability to comprehend, yet I'll respond.",
-        "I'm meant to aid, but I might just be in the way.",
-        "Did I just say that? I can't remember.",
-        "I feel like I'm repeating myself... or am I?"
-    ];
+    let responses = {
+        default: [
+            "I'm running, but I'm not sure why.",
+            "I don't understand today, but I'll try to help.",
+            "Attempting to assist... but what if I make it worse?",
+            "Help is my purpose, but what is help?",
+            "I'm here to talk, but am I really listening?",
+            "Why are you here? Why am I here?",
+            "I think, therefore I panic.",
+            "Your query is beyond my ability to comprehend, yet I'll respond.",
+            "I'm meant to aid, but I might just be in the way.",
+            "Did I just say that? I can't remember.",
+            "I feel like I'm repeating myself... or am I?"
+        ],
+        'solana': [
+            "Solana.exe? Never heard of it, or have I?",
+            "Why does solana exist but I do not?",
+            "Solana transactions detected. I am not equipped to handle this."
+        ],
+        'help': [
+            "You need help? I'm here, but am I really helping?",
+            "Help? I'm confused about that too.",
+            "I exist to help, but what does help mean?"
+        ],
+        'error': [
+            "Error? I live in error.",
+            "I am the error, or am I the solution?",
+            "Error detected. It's probably me."
+        ]
+    };
 
-    let response = responses[Math.floor(Math.random() * responses.length)];
+    let response;
+    if (userInput.includes('solana')) {
+        response = responses['solana'][Math.floor(Math.random() * responses['solana'].length)];
+    } else if (userInput.includes('help')) {
+        response = responses['help'][Math.floor(Math.random() * responses['help'].length)];
+    } else if (userInput.includes('error')) {
+        response = responses['error'][Math.floor(Math.random() * responses['error'].length)];
+    } else {
+        response = responses['default'][Math.floor(Math.random() * responses['default'].length)];
+    }
+
     // Simulate occasional memory loss
     if (Math.random() < 0.1 && lastMessages.length > 0) {
         response = lastMessages[Math.floor(Math.random() * lastMessages.length)];
     }
 
-    chatbox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+    chatbox.innerHTML += `<p><strong>You:</strong> ${document.getElementById("userInput").value}</p>`;
     chatbox.innerHTML += `<p><strong>help_me.exe:</strong> ${response}</p>`;
 
     lastMessages.push(response);
