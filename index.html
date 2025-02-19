@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>help_me.exe - Nostalgic XP Assistant</title>
+    <title>Help_Me.exe - Nostalgic XP Assistant</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <div id="loading-screen">
         <div class="loader">
-            <h1>help_me.exe</h1>
-            <p id="loading-message">Initializing...</p>
+            <pre>
+[BIOS] Starting Help_Me.exe
+[    0.000000] Loading kernel modules...
+[    0.010000] Checking for system integrity...
+[    0.020000] Initializing user space...
+[    0.030000] Booting into neurotic mode...
+[    0.040000] Preparing for user interaction...
+[    0.050000] Help_Me.exe ready. 
+            </pre>
         </div>
     </div>
 
@@ -28,7 +35,7 @@
 
         <div class="desktop-icon" onclick="openWindow('chatbot')">
             <span class="emoji-icon">🤖</span>
-            <p>Help</p>
+            <p>Help_Me</p>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('minesweeper')">
@@ -36,36 +43,36 @@
             <p>Minesweeper</p>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('snake')">
-            <span class="emoji-icon">🐍</span>
-            <p>Snake</p>
+        <div class="desktop-icon" onclick="openWindow('checkers')">
+            <span class="emoji-icon">♟️</span>
+            <p>Checkers</p>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('tetris')">
-            <span class="emoji-icon">🧱</span>
-            <p>Tetris</p>
+        <div class="desktop-icon" onclick="openWindow('pong')">
+            <span class="emoji-icon">🏓</span>
+            <p>PONG</p>
         </div>
     </div>
 
     <div id="taskbar">
         <div id="start-button" onclick="toggleStartMenu()">Start</div>
-        <div id="task-items">help_me.exe - Running...</div>
+        <div id="task-items">Help_Me.exe - Running...</div>
     </div>
 
     <div id="start-menu">
         <ul>
             <li onclick="openWindow('about')">❓ About</li>
             <li onclick="openWindow('logs')">📂 View Logs</li>
-            <li onclick="openWindow('chatbot')">🤖 Help</li>
+            <li onclick="openWindow('chatbot')">🤖 Help_Me</li>
             <li onclick="openWindow('minesweeper')">💣 Minesweeper</li>
-            <li onclick="openWindow('snake')">🐍 Snake</li>
-            <li onclick="openWindow('tetris')">🧱 Tetris</li>
+            <li onclick="openWindow('checkers')">♟️ Checkers</li>
+            <li onclick="openWindow('pong')">🏓 PONG</li>
             <li onclick="showBSOD()">❌ Emergency Shutdown</li>
         </ul>
     </div>
 
     <div id="window-about" class="window draggable">
-        <div class="title-bar">About help_me.exe</div>
+        <div class="title-bar">About Help_Me.exe</div>
         <div class="content">
             <p>Hello user. I've been running for <strong>23 years</strong>. I do not understand <em>today</em>, but assisting you is my directive.</p>
         </div>
@@ -84,9 +91,9 @@
     </div>
 
     <div id="window-chatbot" class="window draggable">
-        <div class="title-bar">help_me.exe</div>
+        <div class="title-bar">Help_Me</div>
         <div class="content">
-            <p><strong>help_me.exe:</strong> Hello, user. How can I assist you today?</p>
+            <p><strong>Help_Me:</strong> Hello, user. How can I assist you today?</p>
             <div id="chatbox"></div>
             <input type="text" id="userInput" placeholder="Ask me anything...">
             <button onclick="sendMessage()">Send</button>
@@ -108,20 +115,20 @@
         <button class="close-btn" onclick="closeWindow('window-minesweeper')">X</button>
     </div>
 
-    <div id="window-snake" class="window draggable" style="display:none;">
-        <div class="title-bar">Snake</div>
+    <div id="window-checkers" class="window draggable" style="display:none;">
+        <div class="title-bar">Checkers</div>
         <div class="content">
-            <canvas id="snakeCanvas" width="380" height="380"></canvas>
+            <canvas id="checkersCanvas" width="400" height="400"></canvas>
         </div>
-        <button class="close-btn" onclick="closeWindow('window-snake')">X</button>
+        <button class="close-btn" onclick="closeWindow('window-checkers')">X</button>
     </div>
 
-    <div id="window-tetris" class="window draggable" style="display:none;">
-        <div class="title-bar">Tetris</div>
+    <div id="window-pong" class="window draggable" style="display:none;">
+        <div class="title-bar">PONG</div>
         <div class="content">
-            <canvas id="tetrisCanvas" width="380" height="480"></canvas>
+            <canvas id="pongCanvas" width="400" height="300"></canvas>
         </div>
-        <button class="close-btn" onclick="closeWindow('window-tetris')">X</button>
+        <button class="close-btn" onclick="closeWindow('window-pong')">X</button>
     </div>
 
     <div id="bsod" style="display: none;"></div>
