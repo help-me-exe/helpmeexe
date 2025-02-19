@@ -108,9 +108,6 @@ function openLogFile(logName) {
     alert(logs[logName] || "Log file not found. Am I hiding something from myself?");
 }
 
-    alert(logs[logName]);
-}
-
 function attemptGame(game) {
     let gameWindow = document.createElement('div');
     gameWindow.classList.add('window', 'draggable');
