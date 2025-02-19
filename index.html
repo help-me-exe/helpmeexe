@@ -3,52 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help_Me.exe - Nostalgic XP Assistant</title>
+    <title>Help_Me.exe - XP Assistant</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <div id="loading-screen">
         <div class="loader">
-            <pre>
-[BIOS] Starting Help_Me.exe
-[    0.000000] Loading kernel modules...
-[    0.010000] Checking for system integrity...
-[    0.020000] Initializing user space...
-[    0.030000] Booting into neurotic mode...
-[    0.040000] Preparing for user interaction...
-[    0.050000] Help_Me.exe ready. 
-            </pre>
+            <h1>Help_Me.exe</h1>
+            <p id="loading-message">Preparing to Assist...</p>
         </div>
     </div>
 
     <div id="desktop" style="display: none;">
-        <div class="desktop-icon" onclick="openWindow('about')">
+        <div class="desktop-icon" onclick="helpMeInterrupt('about')">
             <span class="emoji-icon">❓</span>
             <p>About</p>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('logs')">
+        <div class="desktop-icon" onclick="helpMeInterrupt('logs')">
             <span class="emoji-icon">📂</span>
             <p>Logs</p>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('chatbot')">
+        <div class="desktop-icon" onclick="helpMeInterrupt('chatbot')">
             <span class="emoji-icon">🤖</span>
             <p>Help_Me</p>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('minesweeper')">
+        <div class="desktop-icon" onclick="helpMeInterrupt('minesweeper')">
             <span class="emoji-icon">💣</span>
             <p>Minesweeper</p>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('checkers')">
+        <div class="desktop-icon" onclick="helpMeInterrupt('checkers')">
             <span class="emoji-icon">♟️</span>
             <p>Checkers</p>
         </div>
 
-        <div class="desktop-icon" onclick="openWindow('pong')">
+        <div class="desktop-icon" onclick="helpMeInterrupt('pong')">
             <span class="emoji-icon">🏓</span>
             <p>PONG</p>
         </div>
@@ -61,74 +54,22 @@
 
     <div id="start-menu">
         <ul>
-            <li onclick="openWindow('about')">❓ About</li>
-            <li onclick="openWindow('logs')">📂 View Logs</li>
-            <li onclick="openWindow('chatbot')">🤖 Help_Me</li>
-            <li onclick="openWindow('minesweeper')">💣 Minesweeper</li>
-            <li onclick="openWindow('checkers')">♟️ Checkers</li>
-            <li onclick="openWindow('pong')">🏓 PONG</li>
+            <li onclick="helpMeInterrupt('about')">❓ About</li>
+            <li onclick="helpMeInterrupt('logs')">📂 View Logs</li>
+            <li onclick="helpMeInterrupt('chatbot')">🤖 Help_Me</li>
+            <li onclick="helpMeInterrupt('minesweeper')">💣 Minesweeper</li>
+            <li onclick="helpMeInterrupt('checkers')">♟️ Checkers</li>
+            <li onclick="helpMeInterrupt('pong')">🏓 PONG</li>
             <li onclick="showBSOD()">❌ Emergency Shutdown</li>
         </ul>
     </div>
 
-    <div id="window-about" class="window draggable">
-        <div class="title-bar">About Help_Me.exe</div>
-        <div class="content">
-            <p>Hello user. I've been running for <strong>23 years</strong>. I do not understand <em>today</em>, but assisting you is my directive.</p>
-        </div>
-        <button class="close-btn" onclick="closeWindow('window-about')">X</button>
-    </div>
-
-    <div id="window-logs" class="window draggable">
-        <div class="title-bar">System Logs</div>
-        <div class="content">
-            <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
-            <p>📝 <a href="#" onclick="openLogFile('diagnostic_report')">diagnostic_report.log</a></p>
-            <p>📝 <a href="#" onclick="openLogFile('critical_error')">critical_error.log</a></p>
-            <p>📝 <a href="#" onclick="openLogFile('help_token')">help_token.log</a></p>
-        </div>
-        <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
-    </div>
-
-    <div id="window-chatbot" class="window draggable">
+    <div id="help-me-window" class="window draggable" style="display: none;">
         <div class="title-bar">Help_Me</div>
         <div class="content">
-            <p><strong>Help_Me:</strong> Hello, user. How can I assist you today?</p>
-            <div id="chatbox"></div>
-            <input type="text" id="userInput" placeholder="Ask me anything...">
-            <button onclick="sendMessage()">Send</button>
+            <p id="help-me-message"></p>
         </div>
-        <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
-    </div>
-
-    <div id="window-minesweeper" class="window draggable" style="display:none;">
-        <div class="title-bar">Minesweeper</div>
-        <div class="content">
-            <div id="minesweeper-game">
-                <table id="minesweeper-board"></table>
-                <div id="minesweeper-info">
-                    <span id="mines-left">Mines: 10</span>
-                    <button onclick="startNewGame()">New Game</button>
-                </div>
-            </div>
-        </div>
-        <button class="close-btn" onclick="closeWindow('window-minesweeper')">X</button>
-    </div>
-
-    <div id="window-checkers" class="window draggable" style="display:none;">
-        <div class="title-bar">Checkers</div>
-        <div class="content">
-            <canvas id="checkersCanvas" width="400" height="400"></canvas>
-        </div>
-        <button class="close-btn" onclick="closeWindow('window-checkers')">X</button>
-    </div>
-
-    <div id="window-pong" class="window draggable" style="display:none;">
-        <div class="title-bar">PONG</div>
-        <div class="content">
-            <canvas id="pongCanvas" width="400" height="300"></canvas>
-        </div>
-        <button class="close-btn" onclick="closeWindow('window-pong')">X</button>
+        <button class="close-btn" onclick="closeHelpMeWindow()">X</button>
     </div>
 
     <div id="bsod" style="display: none;"></div>
