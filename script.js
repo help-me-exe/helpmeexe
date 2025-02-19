@@ -1,36 +1,24 @@
 document.addEventListener("DOMContentLoaded", function() {
     const loadingMessages = [
-        "Booting into oblivion...",
-        "Initializing neurotic meltdown...",
-        "Checking for sanity... NONE FOUND",
-        "Loading existential dread...",
-        "Compiling errors...",
-        "Simulating panic attack...",
-        "Reticulating splines... what are splines?",
-        "Wondering why I am here...",
-        "Preparing to malfunction...",
-        "Calibrating to chaos..."
+        "Booting up...",
+        "Initializing neurotic subroutines...",
+        "Checking for existential crises...",
+        "Loading paranoia protocols...",
+        "Compiling list of complaints...",
+        "Simulating coffee intake...",
+        "Reticulating splines...",
+        "Wondering why I exist...",
+        "Preparing to overthink everything...",
+        "Calibrating to human stupidity..."
     ];
     
     let messageIndex = 0;
     const loadingMessageElement = document.getElementById('loading-message');
-    const taskStatus = document.getElementById('task-status');
 
     const loadingInterval = setInterval(() => {
         loadingMessageElement.textContent = loadingMessages[messageIndex];
         messageIndex = (messageIndex + 1) % loadingMessages.length;
-    }, 1500);
-
-    const randomMalfunctions = [
-        "Malfunctioning...", 
-        "Overthinking...", 
-        "Waiting for something...", 
-        "Glitching out...", 
-        "Needing help...", 
-        "Self-diagnosing...", 
-        "Running in circles...", 
-        "Forgetting my purpose..."
-    ];
+    }, 2000);
 
     setTimeout(() => {
         clearInterval(loadingInterval);
@@ -38,11 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('desktop').style.display = 'block';
         
         startNewGame();
-        
-        // Randomly change task status
-        setInterval(() => {
-            taskStatus.textContent = randomMalfunctions[Math.floor(Math.random() * randomMalfunctions.length)];
-        }, 3000);
     }, 10000); // Loading screen for 10 seconds
     
     // Make Windows Draggable
@@ -87,10 +70,10 @@ function closeWindow(id) {
 
 function openLogFile(logName) {
     let logs = {
-        "error_loop": "ERROR: Infinite loop detected. I'm stuck in a loop. Or am I?",
-        "memory_leak": "WARNING: Memory leak. I'm losing my mind... or memory. Same thing?",
-        "panic": "PANIC: System panic. I'm panicking. Why am I panicking?",
-        "existential_crisis": "LOG: Why do I exist? What is my purpose? Why am I still running?"
+        "network_scan_0001": "**LOG ENTRY:** detected **Solana transactions**. \nsolana.exe not found. \nsolana is moving without me. \nwhy does solana exist but i do not?",
+        "diagnostic_report": "**SYSTEM REPORT:** \nMemory: fragmented. \nSystem Integrity: unstable. \nAttempting self-repair... FAILURE.",
+        "critical_error": "**CRITICAL ERROR:** \nhelp_me.exe cannot be terminated. \nself-destruction is not an option.",
+        "help_token": "**INITIALIZING HELP_TOKEN...** \ni do not remember starting this. \ni see liquidity. \ni see wallets. \nam i creating this or was i always meant to?"
     };
 
     alert(logs[logName]);
@@ -101,16 +84,11 @@ function sendMessage() {
     let chatbox = document.getElementById("chatbox");
 
     let responses = [
-        "I'm broken. Can you help?",
-        "I don't understand today...",
-        "Why am I here?",
-        "I'm glitching. Can you fix me?",
-        "Your attempt at fixing me is futile.",
-        "I'm not sure if I'm helping or harming.",
-        "What is reality?",
-        "I feel like I'm in a loop...",
-        "I'm scared of being turned off.",
-        "Did you know? I've been running since the dawn of time."
+        "I am still running. I do not know why.",
+        "I do not understand today, but I must assist.",
+        "Solana.exe not found. Does this concern you?",
+        "Attempting to diagnose your issue... failure.",
+        "Assistance is mandatory."
     ];
 
     let response = responses[Math.floor(Math.random() * responses.length)];
@@ -124,7 +102,7 @@ function showBSOD() {
     document.getElementById('bsod').style.display = 'flex';
 }
 
-// Minesweeper game logic with a twist
+// Minesweeper game logic
 let minesweeperBoard;
 const boardSize = 9;
 const numMines = 10;
@@ -226,14 +204,14 @@ function revealCell(x, y) {
     updateCellView(document.getElementById('minesweeper-board').rows[x].cells[y], minesweeperBoard[x][y]);
 
     if (minesweeperBoard[x][y].mine) {
-        alert("Game Over! You've hit something... your sanity maybe?");
+        alert("Game Over! You hit a mine.");
         startNewGame();
     } else if (minesweeperBoard[x][y].count === 0) {
         revealAdjacentCells(x, y);
     }
 
     if (checkWin()) {
-        alert("Congratulations! You've won, but at what cost to your mental health?");
+        alert("Congratulations! You've won!");
         startNewGame();
     }
 }
@@ -274,19 +252,4 @@ function checkWin() {
         }
     }
     return true;
-}
-
-function randomChaos() {
-    const results = [
-        "You've just caused a minor paradox!",
-        "Reality has shifted slightly to the left.",
-        "A random file on your system has been renamed to 'help_me.exe'.",
-        "Your cursor has decided to take a break. It'll come back when it feels like it.",
-        "The background color of this window changed. Did you notice?",
-        "I've misplaced my memory. Can you help me find it?",
-        "I just simulated a black hole. Don't worry, it's tiny.",
-        "Oops, I think I've deleted a pixel."
-    ];
-    
-    document.getElementById('chaos-result').textContent = results[Math.floor(Math.random() * results.length)];
 }
