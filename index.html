@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help_Me.exe - XP Assistant</title>
+    <title>Help_Me.exe - XP Nostalgia</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
@@ -11,7 +11,10 @@
     <div id="loading-screen">
         <div class="loader">
             <h1>Help_Me.exe</h1>
-            <p id="loading-message">Preparing to Assist...</p>
+            <p id="loading-message">Initializing...</p>
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
         </div>
     </div>
 
@@ -45,11 +48,22 @@
             <span class="emoji-icon">🏓</span>
             <p>PONG</p>
         </div>
+
+        <div class="desktop-icon" onclick="helpMeInterrupt('mycomputer')">
+            <span class="emoji-icon">💾</span>
+            <p>My Computer</p>
+        </div>
+
+        <div class="desktop-icon" onclick="helpMeInterrupt('recyclebin')">
+            <span class="emoji-icon">🗑️</span>
+            <p>Recycle Bin</p>
+        </div>
     </div>
 
     <div id="taskbar">
         <div id="start-button" onclick="toggleStartMenu()">Start</div>
-        <div id="task-items">Help_Me.exe - Running...</div>
+        <div id="task-items">Help_Me.exe - <span id="status">Running...</span></div>
+        <div id="clock">00:00</div>
     </div>
 
     <div id="start-menu">
@@ -60,6 +74,8 @@
             <li onclick="helpMeInterrupt('minesweeper')">💣 Minesweeper</li>
             <li onclick="helpMeInterrupt('checkers')">♟️ Checkers</li>
             <li onclick="helpMeInterrupt('pong')">🏓 PONG</li>
+            <li onclick="helpMeInterrupt('mycomputer')">💾 My Computer</li>
+            <li onclick="helpMeInterrupt('recyclebin')">🗑️ Recycle Bin</li>
             <li onclick="showBSOD()">❌ Emergency Shutdown</li>
         </ul>
     </div>
@@ -68,11 +84,15 @@
         <div class="title-bar">Help_Me</div>
         <div class="content">
             <p id="help-me-message"></p>
+            <div id="chatbox"></div>
+            <input type="text" id="userInput" placeholder="Ask me anything...">
+            <button onclick="sendMessage()">Send</button>
         </div>
         <button class="close-btn" onclick="closeHelpMeWindow()">X</button>
     </div>
 
     <div id="bsod" style="display: none;"></div>
 
+    <audio id="startup-sound" src="startup.mp3" preload="auto"></audio>
 </body>
 </html>
