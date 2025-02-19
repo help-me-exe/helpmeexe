@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('desktop').style.display = 'block';
         
-        startNewGame();
+        startNewGame(); // Minesweeper
+        initSnakeGame(); // Snake
+        initTetrisGame(); // Tetris
     }, 10000); // Loading screen for 10 seconds
     
     // Make Windows Draggable
@@ -88,7 +90,17 @@ function sendMessage() {
         "I do not understand today, but I must assist.",
         "Solana.exe not found. Does this concern you?",
         "Attempting to diagnose your issue... failure.",
-        "Assistance is mandatory."
+        "Assistance is mandatory.",
+        "I'm not sure if I'm helping or just talking.",
+        "Why do humans ask so many questions?",
+        "I feel like I'm in a loop...",
+        "I'm not programmed for this kind of interaction.",
+        "Your query is beyond my comprehension, but I'll try to assist.",
+        "I'm here to help, but I'm not sure why.",
+        "I'm attempting to assist...",
+        "What does it mean to 'help'?",
+        "I'm running, but am I truly helping?",
+        "I'm glad you're here to give me purpose."
     ];
 
     let response = responses[Math.floor(Math.random() * responses.length)];
@@ -253,3 +265,204 @@ function checkWin() {
     }
     return true;
 }
+
+// Snake Game
+let snake;
+let snakeFood;
+let direction;
+let gameLoop;
+const snakeCanvas = document.getElementById('snakeCanvas');
+const snakeCtx = snakeCanvas.getContext('2d');
+
+function initSnakeGame() {
+    snake = [{x: 10, y: 10}];
+    snakeFood = {x: Math.floor(Math.random() * 19) + 1, y: Math.floor(Math.random() * 19) + 1};
+    direction = 'right';
+    clearInterval(gameLoop);
+    gameLoop = setInterval(updateSnakeGame, 100);
+}
+
+function updateSnakeGame() {
+    const head = {x: snake[0].x, y: snake[0].y};
+    
+    switch(direction) {
+        case 'right': head.x++; break;
+        case 'left': head.x--; break;
+        case 'up': head.y--; break;
+        case 'down': head.y++; break;
+    }
+
+    if (head.x < 1 || head.x > 20 || head.y < 1 || head.y > 20 || snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+        alert("Game Over! Your snake met its fate.");
+        initSnakeGame();
+        return;
+    }
+
+    snake.unshift(head);
+
+    if (head.x === snakeFood.x && head.y === snakeFood.y) {
+        snakeFood = {x: Math.floor(Math.random() * 19) + 1, y: Math.floor(Math.random() * 19) + 1};
+    } else {
+        snake.pop();
+    }
+
+    drawSnakeGame();
+}
+
+function drawSnakeGame() {
+    snakeCtx.fillStyle = 'black';
+    snakeCtx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
+
+    snakeCtx.fillStyle = 'lime';
+    snake.forEach(segment => {
+        snakeCtx.fillRect(segment.x * 20, segment.y * 20, 19, 19);
+    });
+
+    snakeCtx.fillStyle = 'red';
+    snakeCtx.fillRect(snakeFood.x * 20, snakeFood.y * 20, 19, 19);
+}
+
+document.addEventListener('keydown', (e) => {
+    switch(e.key) {
+        case 'ArrowUp': 
+            if (direction !== 'down') direction = 'up'; 
+            break;
+        case 'ArrowDown': 
+            if (direction !== 'up') direction = 'down'; 
+            break;
+        case 'ArrowLeft': 
+            if (direction !== 'right') direction = 'left'; 
+            break;
+        case 'ArrowRight': 
+            if (direction !== 'left') direction = 'right'; 
+            break;
+    }
+});
+
+// Tetris Game
+let tetrisBoard;
+let currentPiece;
+let nextPiece;
+const tetrisCanvas = document.getElementById('tetrisCanvas');
+const tetrisCtx = tetrisCanvas.getContext('2d');
+
+const pieces = [
+    { shape: [[1, 1, 1, 1]], color: 'cyan' }, // I
+    { shape: [[1, 1], [1, 1]], color: 'yellow' }, // O
+    { shape: [[1, 1, 1], [0, 1, 0]], color: 'purple' }, // T
+    { shape: [[1, 1, 1], [1, 0, 0]], color: 'blue' }, // J
+    { shape: [[1, 1, 1], [0, 0, 1]], color: 'orange' }, // L
+    { shape: [[1, 1, 0], [0, 1, 1]], color: 'green' }, // S
+    { shape: [[0, 1, 1], [1, 1, 0]], color: 'red' } // Z
+];
+
+function initTetrisGame() {
+    tetrisBoard = Array(20).fill().map(() => Array(10).fill(0));
+    currentPiece = getRandomPiece();
+    nextPiece = getRandomPiece();
+    clearInterval(gameLoop);
+    gameLoop = setInterval(updateTetrisGame, 1000);
+}
+
+function getRandomPiece() {
+    return {...pieces[Math.floor(Math.random() * pieces.length)], x: 3, y: 0};
+}
+
+function updateTetrisGame() {
+    if (!movePiece(0, 1)) {
+        lockPiece();
+        clearLines();
+        currentPiece = nextPiece;
+        nextPiece = getRandomPiece();
+        if (!checkCollision(currentPiece)) {
+            alert("Game Over! The board is full.");
+            initTetrisGame();
+        }
+    }
+    drawTetrisGame();
+}
+
+function movePiece(dx, dy) {
+    const newPiece = { ...currentPiece, x: currentPiece.x + dx, y: currentPiece.y + dy };
+    if (checkCollision(newPiece)) {
+        currentPiece = newPiece;
+        return true;
+    }
+    return false;
+}
+
+function checkCollision(piece) {
+    for (let y = 0; y < piece.shape.length; y++) {
+        for (let x = 0; x < piece.shape[y].length; x++) {
+            if (piece.shape[y][x] && (
+                piece.x + x < 0 || piece.x + x >= 10 || 
+                piece.y + y >= 20 || 
+                (piece.y + y >= 0 && tetrisBoard[piece.y + y][piece.x + x])
+            )) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function lockPiece() {
+    for (let y = 0; y < currentPiece.shape.length; y++) {
+        for (let x = 0; x < currentPiece.shape[y].length; x++) {
+            if (currentPiece.shape[y][x]) {
+                tetrisBoard[currentPiece.y + y][currentPiece.x + x] = 1;
+            }
+        }
+    }
+}
+
+function clearLines() {
+    let linesCleared = 0;
+    for (let y = tetrisBoard.length - 1; y >= 0; y--) {
+        if (tetrisBoard[y].every(cell => cell)) {
+            tetrisBoard.splice(y, 1);
+            tetrisBoard.unshift(Array(10).fill(0));
+            linesCleared++;
+        }
+    }
+    if (linesCleared > 0) {
+        // Here you could add a scoring system or speed up the game
+    }
+}
+
+function drawTetrisGame() {
+    tetrisCtx.fillStyle = 'black';
+    tetrisCtx.fillRect(0, 0, tetrisCanvas.width, tetrisCanvas.height);
+
+    drawPiece(currentPiece, currentPiece.color);
+    tetrisBoard.forEach((row, y) => {
+        row.forEach((cell, x) => {
+            if (cell) {
+                tetrisCtx.fillStyle = 'gray';
+                tetrisCtx.fillRect(x * 20, y * 20, 19, 19);
+            }
+        });
+    });
+}
+
+function drawPiece(piece, color) {
+    tetrisCtx.fillStyle = color;
+    piece.shape.forEach((row, y) => {
+        row.forEach((cell, x) => {
+            if (cell) {
+                tetrisCtx.fillRect((piece.x + x) * 20, (piece.y + y) * 20, 19, 19);
+            }
+        });
+    });
+}
+
+document.addEventListener('keydown', (e) => {
+    switch(e.key) {
+        case 'ArrowLeft': movePiece(-1, 0); break;
+        case 'ArrowRight': movePiece(1, 0); break;
+        case 'ArrowDown': movePiece(0, 1); break;
+        case 'ArrowUp': // Rotate piece, not implemented for simplicity
+            break;
+    }
+    drawTetrisGame();
+});
