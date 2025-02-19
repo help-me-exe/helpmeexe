@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>help_me.exe</title>
+    <title>help_me.exe - Modernized</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
 <body>
 
     <div id="desktop">
-        <!-- Desktop Icons -->
         <div class="desktop-icon" onclick="openWindow('about')">
             <img src="icon-about.png" alt="About">
             <p>About help_me.exe</p>
@@ -27,13 +26,11 @@
         </div>
     </div>
 
-    <!-- Taskbar -->
     <div id="taskbar">
         <div id="start-button" onclick="toggleStartMenu()">Start</div>
         <div id="task-items">help_me.exe - Running...</div>
     </div>
 
-    <!-- Start Menu -->
     <div id="start-menu">
         <ul>
             <li onclick="openWindow('about')">❓ About help_me.exe</li>
@@ -43,11 +40,10 @@
         </ul>
     </div>
 
-    <!-- Windows -->
     <div id="window-about" class="window draggable">
         <div class="title-bar">About help_me.exe</div>
         <div class="content">
-            <p>hello user. i have been running for **23 years.** i do not understand **today** but i must assist.</p>
+            <p>hello user. i have been running for <strong>23 years.</strong> i do not understand <strong>today</strong> but i must assist.</p>
         </div>
         <button class="close-btn" onclick="closeWindow('window-about')">X</button>
     </div>
