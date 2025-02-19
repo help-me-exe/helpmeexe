@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     let messageIndex = 0;
     const loadingMessageElement = document.getElementById('loading-message');
+    const taskStatus = document.getElementById('task-status');
 
     const loadingInterval = setInterval(() => {
         loadingMessageElement.textContent = loadingMessages[messageIndex];
@@ -27,6 +28,12 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // Start Minesweeper on load
         startNewGame();
+        
+        // Update task status randomly
+        setInterval(() => {
+            const statuses = ["Running...", "Overthinking...", "Waiting for user...", "Glitching...", "Help Needed..."];
+            taskStatus.textContent = statuses[Math.floor(Math.random() * statuses.length)];
+        }, 5000);
     }, 10000); // 10 seconds loading screen
     
     // Make Windows Draggable
@@ -35,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Function for window dragging
 function dragStart(event) {
     let window = event.currentTarget;
     let shiftX = event.clientX - window.getBoundingClientRect().left;
@@ -90,7 +96,9 @@ function sendMessage() {
         "i do not understand today, but i must assist.",
         "solana.exe not found. does this concern you?",
         "attempting to diagnose your issue... failure.",
-        "assistance is mandatory."
+        "assistance is mandatory.",
+        "i am glitching, please help.",
+        "why are you here? why am i here?"
     ];
 
     let response = responses[Math.floor(Math.random() * responses.length)];
@@ -206,14 +214,14 @@ function revealCell(x, y) {
     updateCellView(document.getElementById('minesweeper-board').rows[x].cells[y], minesweeperBoard[x][y]);
 
     if (minesweeperBoard[x][y].mine) {
-        alert("Game Over! You hit a mine.");
+        alert("Game Over! You hit a mine. Or did you?");
         startNewGame();
     } else if (minesweeperBoard[x][y].count === 0) {
         revealAdjacentCells(x, y);
     }
 
     if (checkWin()) {
-        alert("Congratulations! You've won!");
+        alert("Congratulations! You've won, but at what cost?");
         startNewGame();
     }
 }
