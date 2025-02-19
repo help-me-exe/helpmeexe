@@ -1,3 +1,4 @@
+/* General Page Style */
 body {
     background-color: #008080;
     color: #fff;
@@ -6,6 +7,7 @@ body {
     overflow: hidden;
 }
 
+/* Fake XP Desktop */
 #desktop {
     position: absolute;
     width: 100%;
@@ -14,6 +16,7 @@ body {
     background-size: cover;
 }
 
+/* XP Taskbar */
 #taskbar {
     position: fixed;
     bottom: 0;
@@ -26,6 +29,7 @@ body {
     padding: 0 10px;
 }
 
+/* XP Start Button */
 #start-button {
     background: #0000ff;
     padding: 5px 15px;
@@ -34,9 +38,37 @@ body {
     font-weight: bold;
 }
 
+/* Fake Start Menu */
+#start-menu {
+    position: absolute;
+    bottom: 50px;
+    left: 10px;
+    background: #c0c0c0;
+    border: 2px solid #000;
+    padding: 10px;
+    display: none;
+}
+
+#start-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#start-menu li {
+    padding: 5px;
+    cursor: pointer;
+    background: #fff;
+    margin-bottom: 3px;
+}
+
+#start-menu li:hover {
+    background: #ddd;
+}
+
+/* Movable Windows */
 .window {
     position: absolute;
-    width: 300px;
+    width: 350px;
     height: auto;
     background: #fff;
     color: #000;
@@ -44,16 +76,22 @@ body {
     display: none;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
     padding: 10px;
+    top: 50px;
+    left: 50px;
+    cursor: move;
 }
 
+/* Title Bar of Windows */
 .title-bar {
     background: #00008b;
     color: #fff;
     padding: 5px;
     font-weight: bold;
     text-align: center;
+    cursor: move;
 }
 
+/* Close Button */
 .close-btn {
     position: absolute;
     top: 5px;
@@ -64,4 +102,44 @@ body {
     cursor: pointer;
     padding: 5px;
     font-weight: bold;
+}
+
+/* Chatbot Box */
+#chatbox {
+    background: #ddd;
+    height: 150px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #000;
+    margin-bottom: 10px;
+}
+
+/* Chat Input */
+#userInput {
+    width: 80%;
+    padding: 5px;
+    border: 1px solid #000;
+}
+
+button {
+    padding: 5px;
+    background: #00008b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0000ff;
+}
+
+/* Glitch Effects */
+@keyframes glitch {
+    0% { transform: translate(1px, 1px); }
+    50% { transform: translate(-1px, -1px); }
+    100% { transform: translate(1px, 1px); }
+}
+
+.glitch {
+    animation: glitch 0.2s infinite;
 }
