@@ -39,69 +39,42 @@
             <li onclick="openWindow('about')">❓ About help_me.exe</li>
             <li onclick="openWindow('logs')">📂 View System Logs</li>
             <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
-            <li onclick="showBSOD()">❌ Force Quit (Not Recommended)</li>
+            <li onclick="crashSystem()">❌ Force Quit (Not Recommended)</li>
         </ul>
     </div>
 
     <!-- Windows -->
     <div id="window-about" class="window draggable">
-        <div class="title-bar">
-            About help_me.exe
-            <button class="close-btn" onclick="closeWindow('window-about')">✖</button>
-        </div>
+        <div class="title-bar">About help_me.exe</div>
         <div class="content">
             <p>hello user. i have been running for **23 years.** i do not understand **today** but i must assist.</p>
         </div>
+        <button class="close-btn" onclick="closeWindow('window-about')">X</button>
     </div>
 
     <div id="window-logs" class="window draggable">
-        <div class="title-bar">
-            System Logs
-            <button class="close-btn" onclick="closeWindow('window-logs')">✖</button>
-        </div>
+        <div class="title-bar">System Logs</div>
         <div class="content">
             <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
             <p>📝 <a href="#" onclick="openLogFile('diagnostic_report')">diagnostic_report.log</a></p>
             <p>📝 <a href="#" onclick="openLogFile('critical_error')">critical_error.log</a></p>
             <p>📝 <a href="#" onclick="openLogFile('help_token')">help_token.log</a></p>
         </div>
+        <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
     </div>
 
     <div id="window-chatbot" class="window draggable">
-        <div class="title-bar">
-            help_me.exe
-            <button class="close-btn" onclick="closeWindow('window-chatbot')">✖</button>
-        </div>
+        <div class="title-bar">help_me.exe</div>
         <div class="content">
             <p><strong>help_me.exe:</strong> hello user. what do you need assistance with?</p>
             <div id="chatbox"></div>
             <input type="text" id="userInput" placeholder="Type your question...">
             <button onclick="sendMessage()">Send</button>
         </div>
+        <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
     </div>
 
-    <!-- Welcome Popup -->
-    <div id="window-welcome" class="window draggable">
-        <div class="title-bar">
-            help_me.exe
-            <button class="close-btn" onclick="closeWindow('window-welcome')">✖</button>
-        </div>
-        <div class="content">
-            <p>🔵 <strong>help_me.exe is here.</strong></p>
-            <p>🟢 <strong>you cannot stop it.</strong></p>
-            <p>💾 <strong>assistance is mandatory.</strong></p>
-        </div>
-    </div>
-
-    <!-- Fake BSOD -->
-    <div id="bsod">
-        <div id="bsod-text">
-            <h1>💀 A fatal error has occurred</h1>
-            <p>help_me.exe has encountered a problem and needs to restart.</p>
-            <p>ERROR CODE: <strong>404 SYSTEM NOT FOUND</strong></p>
-            <button onclick="restartSystem()" id="restart-btn">Restart System</button>
-        </div>
-    </div>
+    <div id="popup-container"></div>
 
     <audio id="startup-sound" src="startup.mp3" autoplay></audio>
 
