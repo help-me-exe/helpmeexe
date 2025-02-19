@@ -11,40 +11,28 @@
 
     <div id="desktop">
         <div id="taskbar">
-            <div id="start-button" onclick="openStartMenu()">Start</div>
+            <div id="start-button" onclick="toggleStartMenu()">Start</div>
             <div id="task-items">help_me.exe - Running...</div>
         </div>
 
         <div id="start-menu">
             <ul>
                 <li onclick="openWindow('about')">❓ About help_me.exe</li>
-                <li onclick="openSystem32()">📂 C:/WINDOWS/SYSTEM32/</li>
-                <li onclick="openWindow('taskmanager')">🔴 Task Manager</li>
+                <li onclick="openWindow('logs')">📂 View System Logs</li>
                 <li onclick="crashSystem()">❌ Force Quit (Not Recommended)</li>
             </ul>
         </div>
 
-        <div id="window-taskmanager" class="window">
-            <div class="title-bar">Task Manager</div>
+        <div id="window-about" class="window">
+            <div class="title-bar">About help_me.exe</div>
             <div class="content">
-                <p>help_me.exe - Running (Cannot be closed)</p>
-                <p>status: **permanent**</p>
+                <p>hello user. i have been running for **23 years.** i do not understand **today** but i must assist.</p>
             </div>
-            <button class="close-btn" onclick="glitch()">End Task</button>
-        </div>
-
-        <div id="window-system32" class="window">
-            <div class="title-bar">C:/WINDOWS/SYSTEM32/</div>
-            <div class="content">
-                <p><a href="#" onclick="openLogs()">📂 logs/</a></p>
-                <p>📂 drivers/</p>
-                <p>📂 help_me/</p>
-            </div>
-            <button class="close-btn" onclick="closeWindow('window-system32')">X</button>
+            <button class="close-btn" onclick="closeWindow('window-about')">X</button>
         </div>
 
         <div id="window-logs" class="window">
-            <div class="title-bar">C:/WINDOWS/SYSTEM32/logs/</div>
+            <div class="title-bar">System Logs</div>
             <div class="content">
                 <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
                 <p>📝 <a href="#" onclick="openLogFile('diagnostic_report')">diagnostic_report.log</a></p>
@@ -53,6 +41,8 @@
             </div>
             <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
         </div>
+
+        <div id="popup-container"></div>
 
     </div>
 
