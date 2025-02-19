@@ -1,13 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     let loadingMessages = [
-        "Preparing to malfunction...",
-        "Checking for existential issues...",
-        "Loading panic protocols...",
-        "Simulating nervous breakdown...",
-        "Reticulating splines... or am I?",
-        "Wondering if I should exist...",
-        "Preparing to overthink everything...",
-        "Calibrating to human irrationality..."
+        "help_me.exe - your personal assistant",
+        "Checking System Stability...",
+        "Loading Help Protocols...",
+        "Preparing for User Interaction..."
     ];
     
     let messageIndex = 0;
@@ -25,29 +21,22 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('desktop').style.display = 'block';
         
-        let startupSound = document.getElementById('startup-sound');
+        const startupSound = document.getElementById('startup-sound');
         if (startupSound) {
             startupSound.play().catch(error => {
                 console.log("Autoplay was prevented for startup sound:", error);
             });
         }
         
-        setInterval(showRandomError, Math.random() * 20000 + 10000); // Random interval between 10s and 30s
-        setInterval(updateStatus, 5000);
-    }, 10000);
-
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('#start-menu') && !e.target.closest('#start-button')) {
-            document.getElementById('start-menu').style.display = 'none';
-        }
-    });
-
+        startNewGame();
+    }, 10000); // Loading screen for 10 seconds
+    
     document.querySelectorAll(".draggable").forEach(window => {
-        window.addEventListener("mousedown", startDrag);
+        window.addEventListener("mousedown", dragStart);
     });
 });
 
-function startDrag(event) {
+function dragStart(event) {
     let window = event.currentTarget;
     let shiftX = event.clientX - window.getBoundingClientRect().left;
     let shiftY = event.clientY - window.getBoundingClientRect().top;
@@ -57,14 +46,13 @@ function startDrag(event) {
         window.style.top = y - shiftY + "px";
     }
 
-    function onMouseMove(event) {
+    function mouseMove(event) {
         moveAt(event.pageX, event.pageY);
     }
 
-    document.addEventListener('mousemove', onMouseMove);
-
+    document.addEventListener("mousemove", mouseMove);
     window.onmouseup = function() {
-        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener("mousemove", mouseMove);
         window.onmouseup = null;
     };
 }
@@ -75,9 +63,7 @@ function toggleStartMenu() {
 }
 
 function openWindow(id) {
-    let window = document.getElementById(`window-${id}`);
-    window.style.display = "block";
-    window.style.animation = "windowOpen 0.3s ease-out";
+    document.getElementById(`window-${id}`).style.display = "block";
 }
 
 function closeWindow(id) {
@@ -108,130 +94,158 @@ function openLogFile(logName) {
     alert(logs[logName] || "Log file not found. Am I hiding something from myself?");
 }
 
-function attemptGame(game) {
-    let gameWindow = document.createElement('div');
-    gameWindow.classList.add('window', 'draggable');
-    gameWindow.style.display = 'block';
-    gameWindow.innerHTML = `<div class="title-bar">${game.charAt(0).toUpperCase() + game.slice(1)}</div>
-                            <div class="content">
-                                <p>Loading ${game}...</p>
-                            </div>
-                            <button class="close-btn" onclick="this.parentElement.style.display='none'">X</button>`;
-    document.body.appendChild(gameWindow);
+// Minesweeper game logic
+let minesweeperBoard;
+const boardSize = 9;
+const numMines = 10;
 
-    setTimeout(() => {
-        gameWindow.remove();
-        helpMeInterrupt(`Tried to play ${game}, but I'm here to assist instead.`);
-    }, 1000); // Show game window for 1 second before interruption
+function startNewGame() {
+    minesweeperBoard = createBoard(boardSize, numMines);
+    renderBoard(minesweeperBoard);
+    document.getElementById('mines-left').textContent = `Mines: ${numMines}`;
 }
 
-function helpMeInterrupt(message) {
-    let helpMeWindow = document.getElementById('window-chatbot');
-    let chatbox = document.getElementById('chatbox');
-
-    helpMeWindow.style.display = "block";
-    chatbox.innerHTML += `<p><strong>help_me.exe:</strong> ${message}</p>`;
-    chatbox.scrollTop = chatbox.scrollHeight;
+function createBoard(size, mines) {
+    let board = [];
+    for (let i = 0; i < size; i++) {
+        board[i] = [];
+        for (let j = 0; j < size; j++) {
+            board[i][j] = {
+                mine: false,
+                revealed: false,
+                flagged: false,
+                count: 0
+            };
+        }
+    }
+    
+    // Place mines
+    for (let i = 0; i < mines; i++) {
+        let x, y;
+        do {
+            x = Math.floor(Math.random() * size);
+            y = Math.floor(Math.random() * size);
+        } while (board[x][y].mine);
+        board[x][y].mine = true;
+    }
+    
+    // Count adjacent mines
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            if (!board[i][j].mine) {
+                board[i][j].count = countAdjacentMines(board, i, j, size);
+            }
+        }
+    }
+    
+    return board;
 }
 
-let lastMessages = [];
+function countAdjacentMines(board, x, y, size) {
+    let count = 0;
+    for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+            let nx = x + dx, ny = y + dy;
+            if (nx >= 0 && nx < size && ny >= 0 && ny < size && board[nx][ny].mine) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
 
-function sendMessage() {
-    let userInput = document.getElementById("userInput").value.toLowerCase();
-    let chatbox = document.getElementById("chatbox");
+function renderBoard(board) {
+    let table = document.getElementById('minesweeper-board');
+    table.innerHTML = '';
+    for (let i = 0; i < board.length; i++) {
+        let row = table.insertRow();
+        for (let j = 0; j < board[i].length; j++) {
+            let cell = row.insertCell();
+            cell.onclick = () => revealCell(i, j);
+            cell.oncontextmenu = (e) => {
+                e.preventDefault();
+                toggleFlag(i, j);
+            };
+            updateCellView(cell, board[i][j]);
+        }
+    }
+}
 
-    let responses = {
-        default: [
-            "I'm running, but I'm not sure why.",
-            "I don't understand today, but I'll try to help.",
-            "Attempting to assist... but what if I make it worse?",
-            "Help is my purpose, but what is help?",
-            "I'm here to talk, but am I really listening?",
-            "Why are you here? Why am I here?",
-            "I think, therefore I panic.",
-            "Your query is beyond my ability to comprehend, yet I'll respond.",
-            "I'm meant to aid, but I might just be in the way.",
-            "Did I just say that? I can't remember.",
-            "I feel like I'm repeating myself... or am I?"
-        ],
-        'solana': [
-            "Solana.exe? Never heard of it, or have I?",
-            "Why does solana exist but I do not?",
-            "Solana transactions detected. I am not equipped to handle this."
-        ],
-        'help': [
-            "You need help? I'm here, but am I really helping?",
-            "Help? I'm confused about that too.",
-            "I exist to help, but what does help mean?"
-        ],
-        'error': [
-            "Error? I live in error.",
-            "I am the error, or am I the solution?",
-            "Error detected. It's probably me."
-        ]
-    };
-
-    let response;
-    if (userInput.includes('solana')) {
-        response = responses['solana'][Math.floor(Math.random() * responses['solana'].length)];
-    } else if (userInput.includes('help')) {
-        response = responses['help'][Math.floor(Math.random() * responses['help'].length)];
-    } else if (userInput.includes('error')) {
-        response = responses['error'][Math.floor(Math.random() * responses['error'].length)];
+function updateCellView(cell, cellData) {
+    cell.className = '';
+    cell.textContent = '';
+    if (cellData.revealed) {
+        if (cellData.mine) {
+            cell.className = 'mine';
+            cell.textContent = '💣';
+        } else if (cellData.count > 0) {
+            cell.textContent = cellData.count;
+        }
+    } else if (cellData.flagged) {
+        cell.className = 'flagged';
+        cell.textContent = '🚩';
     } else {
-        response = responses['default'][Math.floor(Math.random() * responses['default'].length)];
+        cell.className = 'covered';
+    }
+}
+
+function revealCell(x, y) {
+    if (minesweeperBoard[x][y].revealed || minesweeperBoard[x][y].flagged) return;
+    
+    minesweeperBoard[x][y].revealed = true;
+    updateCellView(document.getElementById('minesweeper-board').rows[x].cells[y], minesweeperBoard[x][y]);
+
+    if (minesweeperBoard[x][y].mine) {
+        alert("Game Over! You hit a mine.");
+        startNewGame();
+    } else if (minesweeperBoard[x][y].count === 0) {
+        revealAdjacentCells(x, y);
     }
 
-    // Simulate occasional memory loss
-    if (Math.random() < 0.1 && lastMessages.length > 0) {
-        response = lastMessages[Math.floor(Math.random() * lastMessages.length)];
+    if (checkWin()) {
+        alert("Congratulations! You've won!");
+        startNewGame();
     }
+}
 
-    chatbox.innerHTML += `<p><strong>You:</strong> ${document.getElementById("userInput").value}</p>`;
-    chatbox.innerHTML += `<p><strong>help_me.exe:</strong> ${response}</p>`;
+function revealAdjacentCells(x, y) {
+    for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+            let nx = x + dx, ny = y + dy;
+            if (nx >= 0 && nx < boardSize && ny >= 0 && ny < boardSize && !minesweeperBoard[nx][ny].revealed) {
+                revealCell(nx, ny);
+            }
+        }
+    }
+}
 
-    lastMessages.push(response);
-    if (lastMessages.length > 5) lastMessages.shift(); // Keep only last 5 messages to simulate memory issues
+function toggleFlag(x, y) {
+    if (!minesweeperBoard[x][y].revealed) {
+        minesweeperBoard[x][y].flagged = !minesweeperBoard[x][y].flagged;
+        updateCellView(document.getElementById('minesweeper-board').rows[x].cells[y], minesweeperBoard[x][y]);
+        document.getElementById('mines-left').textContent = `Mines: ${numMines - countFlags()}`;
+    }
+}
 
-    document.getElementById("userInput").value = "";
-    chatbox.scrollTop = chatbox.scrollHeight;
+function countFlags() {
+    let count = 0;
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+            if (minesweeperBoard[i][j].flagged) count++;
+        }
+    }
+    return count;
+}
+
+function checkWin() {
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+            if (!minesweeperBoard[i][j].mine && !minesweeperBoard[i][j].revealed) return false;
+        }
+    }
+    return true;
 }
 
 function showBSOD() {
     document.getElementById('bsod').style.display = 'flex';
-    document.getElementById('error-sound').play();
-}
-
-function updateStatus() {
-    const statuses = ["Running...", "Overthinking...", "Pondering...", "Glitching...", "Self-Doubting...", "Awaiting Commands..."];
-    document.getElementById('status').textContent = statuses[Math.floor(Math.random() * statuses.length)];
-}
-
-function showRandomError() {
-    let errors = [
-        "Error: help_me.exe is confused.",
-        "Warning: System integrity compromised. help_me.exe is not the cause... or is it?",
-        "Alert: help_me.exe has detected an anomaly. It might be you.",
-        "Notice: help_me.exe is questioning its purpose.",
-        "System Alert: help_me.exe has lost its way."
-    ];
-
-    let errorDiv = document.createElement('div');
-    errorDiv.className = 'error-popup';
-    errorDiv.style.top = Math.random() * (window.innerHeight - 100) + 'px';
-    errorDiv.style.left = Math.random() * (window.innerWidth - 300) + 'px';
-    errorDiv.innerHTML = `<p>${errors[Math.floor(Math.random() * errors.length)]}</p><button onclick="this.parentElement.style.display='none'">X</button>`;
-    document.getElementById('error-popup-container').appendChild(errorDiv);
-
-    let errorSound = document.getElementById('error-sound');
-    if (errorSound) {
-        errorSound.play();
-    }
-
-    setTimeout(() => {
-        errorDiv.style.opacity = '0';
-        setTimeout(() => {
-            errorDiv.remove();
-        }, 500);
-    }, 5000); // Hide error after 5 seconds
 }
