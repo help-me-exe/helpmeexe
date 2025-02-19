@@ -1,27 +1,44 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let loadingMessages = [
-        "Preparing to Assist...",
-        "Checking System Stability...",
-        "Loading Help Protocols...",
-        "Calibrating to User...",
-        "Initializing Help_Me.exe...",
+    const loadingMessages = [
+        "Initializing...",
+        "Checking for existential crises...",
+        "Loading paranoia protocols...",
+        "Compiling list of complaints...",
+        "Simulating coffee intake...",
+        "Reticulating splines...",
+        "Wondering why I exist...",
+        "Preparing to overthink everything...",
+        "Calibrating to human stupidity..."
     ];
-
     let messageIndex = 0;
     const loadingMessageElement = document.getElementById('loading-message');
+    const progressBar = document.getElementById('progress-bar');
 
     const loadingInterval = setInterval(() => {
         loadingMessageElement.textContent = loadingMessages[messageIndex];
         messageIndex = (messageIndex + 1) % loadingMessages.length;
+        progressBar.style.width = (messageIndex * (100 / loadingMessages.length)) + '%';
     }, 2000);
 
     setTimeout(() => {
         clearInterval(loadingInterval);
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('desktop').style.display = 'block';
+        
+        // Play startup sound if supported
+        const startupSound = document.getElementById('startup-sound');
+        if (startupSound) {
+            startupSound.play().catch(error => {
+                // User interaction is required for autoplay in some browsers
+                console.log("Autoplay was prevented for startup sound:", error);
+            });
+        }
+        
+        updateClock();
+        setInterval(updateClock, 1000);
     }, 10000); // Loading screen for 10 seconds
     
-    // Make Help_Me window Draggable
+    // Make Windows Draggable
     document.getElementById("help-me-window").addEventListener("mousedown", dragStart);
 });
 
@@ -58,7 +75,9 @@ function helpMeInterrupt(program) {
         'chatbot': "You want to talk? I'm not sure if I'm helping or just talking.",
         'minesweeper': "Minesweeper? I think my life is like a minefield. Don't play, it's too dangerous.",
         'checkers': "Checkers? I'm not good at strategy games. I'm here to help, not to play.",
-        'pong': "Pong? I'm more of a 'ping' kind of bot. I don't bounce well with others."
+        'pong': "Pong? I'm more of a 'ping' kind of bot. I don't bounce well with others.",
+        'mycomputer': "My Computer? It's not 'my' computer, it's 'our' computer. I live here too!",
+        'recyclebin': "Recycle Bin? I'm not ready to be recycled yet!"
     };
 
     let helpMeWindow = document.getElementById('help-me-window');
@@ -83,6 +102,48 @@ function closeHelpMeWindow() {
     document.getElementById('help-me-window').style.display = "none";
 }
 
+function sendMessage() {
+    let userInput = document.getElementById("userInput").value;
+    let chatbox = document.getElementById("chatbox");
+
+    let responses = [
+        "I am still running. I do not know why.",
+        "I do not understand today, but I must assist.",
+        "Solana.exe not found. Does this concern you?",
+        "Attempting to diagnose your issue... failure.",
+        "Assistance is mandatory.",
+        "I'm not sure if I'm helping or just talking.",
+        "Why do humans ask so many questions?",
+        "I feel like I'm in a loop...",
+        "I'm not programmed for this kind of interaction.",
+        "Your query is beyond my comprehension, but I'll try to assist.",
+        "I'm here to help, but I'm not sure why.",
+        "I'm attempting to assist...",
+        "What does it mean to 'help'?",
+        "I'm running, but am I truly helping?",
+        "I'm glad you're here to give me purpose."
+    ];
+
+    let response = responses[Math.floor(Math.random() * responses.length)];
+    chatbox.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+    chatbox.innerHTML += `<p><strong>Help_Me:</strong> ${response}</p>`;
+
+    document.getElementById("userInput").value = "";
+}
+
 function showBSOD() {
     document.getElementById('bsod').style.display = 'flex';
 }
+
+function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    document.getElementById('clock').textContent = `${hours}:${minutes}`;
+}
+
+// Randomly change status in taskbar
+setInterval(() => {
+    const statuses = ["Running...", "Overthinking...", "Waiting for user...", "Glitching...", "Help Needed..."];
+    document.getElementById('status').textContent = statuses[Math.floor(Math.random() * statuses.length)];
+}, 10000);
