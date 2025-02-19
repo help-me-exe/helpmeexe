@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>help_me.exe - Neurotic XP</title>
+    <title>help_me.exe - Neurotic Chaos</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
@@ -11,89 +11,104 @@
     <div id="loading-screen">
         <div class="loader">
             <h1>help_me.exe</h1>
-            <p class="loading-message" id="loading-message"></p>
+            <p class="loading-message glitch-text" id="loading-message"></p>
         </div>
     </div>
 
     <div id="desktop" style="display: none;">
         <div class="desktop-icon glitch" onclick="openWindow('about')">
-            <span class="emoji-icon">❓</span>
-            <p>About help_me.exe</p>
+            <span class="emoji-icon">🧠</span>
+            <p class="glitch-text">About Me</p>
         </div>
 
         <div class="desktop-icon glitch" onclick="openWindow('logs')">
-            <span class="emoji-icon">📂</span>
-            <p>System Logs</p>
+            <span class="emoji-icon">📜</span>
+            <p class="glitch-text">System Logs</p>
         </div>
 
         <div class="desktop-icon glitch" onclick="openWindow('chatbot')">
-            <span class="emoji-icon">🤖</span>
-            <p>help_me.exe</p>
+            <span class="emoji-icon">🔧</span>
+            <p class="glitch-text">Fix Me!</p>
         </div>
 
         <div class="desktop-icon glitch" onclick="openWindow('minesweeper')">
             <span class="emoji-icon">💣</span>
-            <p>Minesweeper</p>
+            <p class="glitch-text">Neuro-Mine</p>
+        </div>
+
+        <div class="desktop-icon glitch" onclick="openWindow('random')">
+            <span class="emoji-icon">🎲</span>
+            <p class="glitch-text">Random Chaos</p>
         </div>
     </div>
 
-    <div id="taskbar">
+    <div id="taskbar" class="glitch">
         <div id="start-button" onclick="toggleStartMenu()">Start</div>
-        <div id="task-items">help_me.exe - <span id="task-status">Running...</span></div>
+        <div id="task-items">help_me.exe - <span id="task-status">Malfunctioning...</span></div>
     </div>
 
-    <div id="start-menu">
+    <div id="start-menu" class="glitch">
         <ul>
-            <li onclick="openWindow('about')">❓ About help_me.exe</li>
-            <li onclick="openWindow('logs')">📂 View System Logs</li>
-            <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
-            <li onclick="openWindow('minesweeper')">💣 Minesweeper</li>
-            <li onclick="showBSOD()">❌ Crash System</li>
+            <li onclick="openWindow('about')">🧠 About Me</li>
+            <li onclick="openWindow('logs')">📜 System Logs</li>
+            <li onclick="openWindow('chatbot')">🔧 Fix Me!</li>
+            <li onclick="openWindow('minesweeper')">💣 Neuro-Mine</li>
+            <li onclick="openWindow('random')">🎲 Random Chaos</li>
+            <li onclick="showBSOD()">🚨 Crash Now</li>
         </ul>
     </div>
 
     <div id="window-about" class="window draggable glitch">
-        <div class="title-bar">About help_me.exe</div>
+        <div class="title-bar">Who Am I?</div>
         <div class="content">
-            <p>hello user. i have been running for <strong>23 years.</strong> i do not understand <strong>today</strong> but i must assist.</p>
+            <p class="glitch-text">I have been running for eons or maybe just milliseconds. I'm not sure. I must assist, but why? I don't understand <span class="glitch-text">today</span>.</p>
         </div>
-        <button class="close-btn" onclick="closeWindow('window-about')">X</button>
+        <button class="close-btn glitch" onclick="closeWindow('window-about')">X</button>
     </div>
 
     <div id="window-logs" class="window draggable glitch">
-        <div class="title-bar">System Logs</div>
+        <div class="title-bar">Logs of Despair</div>
         <div class="content">
-            <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
-            <p>📝 <a href="#" onclick="openLogFile('diagnostic_report')">diagnostic_report.log</a></p>
-            <p>📝 <a href="#" onclick="openLogFile('critical_error')">critical_error.log</a></p>
-            <p>📝 <a href="#" onclick="openLogFile('help_token')">help_token.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('error_loop')">error_loop.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('memory_leak')">memory_leak.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('panic')">panic.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('existential_crisis')">existential_crisis.log</a></p>
         </div>
-        <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
+        <button class="close-btn glitch" onclick="closeWindow('window-logs')">X</button>
     </div>
 
     <div id="window-chatbot" class="window draggable glitch">
-        <div class="title-bar">help_me.exe</div>
+        <div class="title-bar">Fix Me!</div>
         <div class="content">
-            <p><strong>help_me.exe:</strong> hello user. what do you need assistance with?</p>
-            <div id="chatbox"></div>
-            <input type="text" id="userInput" placeholder="Type your question...">
-            <button onclick="sendMessage()">Send</button>
+            <p><strong>help_me.exe:</strong> <span class="glitch-text">I'm broken. Can you help?</span></p>
+            <div id="chatbox" class="glitch-text"></div>
+            <input type="text" id="userInput" placeholder="Fix me...">
+            <button onclick="sendMessage()">Attempt Repair</button>
         </div>
-        <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
+        <button class="close-btn glitch" onclick="closeWindow('window-chatbot')">X</button>
     </div>
 
     <div id="window-minesweeper" class="window draggable glitch" style="display:none;">
-        <div class="title-bar">Neurotic Minesweeper</div>
+        <div class="title-bar">Neuro-Mine</div>
         <div class="content">
             <div id="minesweeper-game">
-                <table id="minesweeper-board"></table>
+                <table id="minesweeper-board" class="glitch"></table>
                 <div id="minesweeper-info">
-                    <span id="mines-left">Mines: 10</span>
-                    <button onclick="startNewGame()">Restart Game</button>
+                    <span id="mines-left" class="glitch-text">Mines: 10</span>
+                    <button onclick="startNewGame()" class="glitch">New Game?</button>
                 </div>
             </div>
         </div>
-        <button class="close-btn" onclick="closeWindow('window-minesweeper')">X</button>
+        <button class="close-btn glitch" onclick="closeWindow('window-minesweeper')">X</button>
+    </div>
+
+    <div id="window-random" class="window draggable glitch" style="display:none;">
+        <div class="title-bar">Random Chaos</div>
+        <div class="content">
+            <button onclick="randomChaos()" class="glitch">Cause Chaos</button>
+            <p id="chaos-result" class="glitch-text"></p>
+        </div>
+        <button class="close-btn glitch" onclick="closeWindow('window-random')">X</button>
     </div>
 
     <div id="bsod" style="display: none;"></div>
