@@ -10,53 +10,71 @@
 <body>
 
     <div id="desktop">
-        <div id="taskbar">
-            <div id="start-button" onclick="toggleStartMenu()">Start</div>
-            <div id="task-items">help_me.exe - Running...</div>
+        <!-- Desktop Icons -->
+        <div class="desktop-icon" onclick="openWindow('about')">
+            <img src="icon-about.png" alt="About">
+            <p>About help_me.exe</p>
         </div>
 
-        <div id="start-menu">
-            <ul>
-                <li onclick="openWindow('about')">❓ About help_me.exe</li>
-                <li onclick="openWindow('logs')">📂 View System Logs</li>
-                <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
-                <li onclick="crashSystem()">❌ Force Quit (Not Recommended)</li>
-            </ul>
+        <div class="desktop-icon" onclick="openWindow('logs')">
+            <img src="icon-folder.png" alt="Logs">
+            <p>System Logs</p>
         </div>
 
-        <div id="window-about" class="window draggable">
-            <div class="title-bar">About help_me.exe</div>
-            <div class="content">
-                <p>hello user. i have been running for **23 years.** i do not understand **today** but i must assist.</p>
-            </div>
-            <button class="close-btn" onclick="closeWindow('window-about')">X</button>
+        <div class="desktop-icon" onclick="openWindow('chatbot')">
+            <img src="icon-chatbot.png" alt="Chatbot">
+            <p>help_me.exe</p>
         </div>
-
-        <div id="window-logs" class="window draggable">
-            <div class="title-bar">System Logs</div>
-            <div class="content">
-                <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
-                <p>📝 <a href="#" onclick="openLogFile('diagnostic_report')">diagnostic_report.log</a></p>
-                <p>📝 <a href="#" onclick="openLogFile('critical_error')">critical_error.log</a></p>
-                <p>📝 <a href="#" onclick="openLogFile('help_token')">help_token.log</a></p>
-            </div>
-            <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
-        </div>
-
-        <div id="window-chatbot" class="window draggable">
-            <div class="title-bar">help_me.exe</div>
-            <div class="content">
-                <p><strong>help_me.exe:</strong> hello user. what do you need assistance with?</p>
-                <div id="chatbox"></div>
-                <input type="text" id="userInput" placeholder="Type your question...">
-                <button onclick="sendMessage()">Send</button>
-            </div>
-            <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
-        </div>
-
-        <div id="popup-container"></div>
-
     </div>
+
+    <!-- Taskbar -->
+    <div id="taskbar">
+        <div id="start-button" onclick="toggleStartMenu()">Start</div>
+        <div id="task-items">help_me.exe - Running...</div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu">
+        <ul>
+            <li onclick="openWindow('about')">❓ About help_me.exe</li>
+            <li onclick="openWindow('logs')">📂 View System Logs</li>
+            <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
+            <li onclick="crashSystem()">❌ Force Quit (Not Recommended)</li>
+        </ul>
+    </div>
+
+    <!-- Windows -->
+    <div id="window-about" class="window draggable">
+        <div class="title-bar">About help_me.exe</div>
+        <div class="content">
+            <p>hello user. i have been running for **23 years.** i do not understand **today** but i must assist.</p>
+        </div>
+        <button class="close-btn" onclick="closeWindow('window-about')">X</button>
+    </div>
+
+    <div id="window-logs" class="window draggable">
+        <div class="title-bar">System Logs</div>
+        <div class="content">
+            <p>📝 <a href="#" onclick="openLogFile('network_scan_0001')">network_scan_0001.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('diagnostic_report')">diagnostic_report.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('critical_error')">critical_error.log</a></p>
+            <p>📝 <a href="#" onclick="openLogFile('help_token')">help_token.log</a></p>
+        </div>
+        <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
+    </div>
+
+    <div id="window-chatbot" class="window draggable">
+        <div class="title-bar">help_me.exe</div>
+        <div class="content">
+            <p><strong>help_me.exe:</strong> hello user. what do you need assistance with?</p>
+            <div id="chatbox"></div>
+            <input type="text" id="userInput" placeholder="Type your question...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+        <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
+    </div>
+
+    <div id="popup-container"></div>
 
     <audio id="startup-sound" src="startup.mp3" autoplay></audio>
 
