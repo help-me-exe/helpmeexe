@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setInterval(spawnRandomError, 12000); // Errors appear every 12 seconds
 });
 
-// Draggable Windows
+// Make Windows Draggable
 document.querySelectorAll(".draggable").forEach(window => {
     window.addEventListener("mousedown", dragStart);
 });
