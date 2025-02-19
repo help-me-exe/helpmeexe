@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>help_me.exe - Neurotic XP Assistant</title>
+    <title>help_me.exe - Nostalgic XP Assistant</title>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
@@ -11,43 +11,55 @@
     <div id="loading-screen">
         <div class="loader">
             <h1>help_me.exe</h1>
-            <p id="loading-message" class="glitch-text">Initializing...</p>
+            <p id="loading-message">Initializing...</p>
         </div>
     </div>
 
     <div id="desktop" style="display: none;">
         <div class="desktop-icon" onclick="openWindow('about')">
             <span class="emoji-icon">❓</span>
-            <p>About Me</p>
+            <p>About</p>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('logs')">
             <span class="emoji-icon">📂</span>
-            <p>System Logs</p>
+            <p>Logs</p>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('chatbot')">
             <span class="emoji-icon">🤖</span>
-            <p>Need Help?</p>
+            <p>Help</p>
         </div>
 
         <div class="desktop-icon" onclick="openWindow('minesweeper')">
             <span class="emoji-icon">💣</span>
-            <p>Mind Mines</p>
+            <p>Minesweeper</p>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('snake')">
+            <span class="emoji-icon">🐍</span>
+            <p>Snake</p>
+        </div>
+
+        <div class="desktop-icon" onclick="openWindow('tetris')">
+            <span class="emoji-icon">🧱</span>
+            <p>Tetris</p>
         </div>
     </div>
 
     <div id="taskbar">
         <div id="start-button" onclick="toggleStartMenu()">Start</div>
-        <div id="task-items">help_me.exe - <span id="task-status">Running...</span></div>
+        <div id="task-items">help_me.exe - Running...</div>
     </div>
 
     <div id="start-menu">
         <ul>
-            <li onclick="openWindow('about')">❓ About Me</li>
-            <li onclick="openWindow('logs')">📂 View System Logs</li>
-            <li onclick="openWindow('chatbot')">🤖 Open help_me.exe</li>
-            <li onclick="openWindow('minesweeper')">💣 Mind Mines</li>
+            <li onclick="openWindow('about')">❓ About</li>
+            <li onclick="openWindow('logs')">📂 View Logs</li>
+            <li onclick="openWindow('chatbot')">🤖 Help</li>
+            <li onclick="openWindow('minesweeper')">💣 Minesweeper</li>
+            <li onclick="openWindow('snake')">🐍 Snake</li>
+            <li onclick="openWindow('tetris')">🧱 Tetris</li>
             <li onclick="showBSOD()">❌ Emergency Shutdown</li>
         </ul>
     </div>
@@ -55,7 +67,7 @@
     <div id="window-about" class="window draggable">
         <div class="title-bar">About help_me.exe</div>
         <div class="content">
-            <p>Hello user. I have been running for <strong>23 years</strong>. I do not understand <em>today</em>, but I must assist.</p>
+            <p>Hello user. I've been running for <strong>23 years</strong>. I do not understand <em>today</em>, but assisting you is my directive.</p>
         </div>
         <button class="close-btn" onclick="closeWindow('window-about')">X</button>
     </div>
@@ -74,16 +86,16 @@
     <div id="window-chatbot" class="window draggable">
         <div class="title-bar">help_me.exe</div>
         <div class="content">
-            <p><strong>help_me.exe:</strong> Hello user. What do you need assistance with?</p>
+            <p><strong>help_me.exe:</strong> Hello, user. How can I assist you today?</p>
             <div id="chatbox"></div>
-            <input type="text" id="userInput" placeholder="Type your question...">
+            <input type="text" id="userInput" placeholder="Ask me anything...">
             <button onclick="sendMessage()">Send</button>
         </div>
         <button class="close-btn" onclick="closeWindow('window-chatbot')">X</button>
     </div>
 
     <div id="window-minesweeper" class="window draggable" style="display:none;">
-        <div class="title-bar">Mind Mines</div>
+        <div class="title-bar">Minesweeper</div>
         <div class="content">
             <div id="minesweeper-game">
                 <table id="minesweeper-board"></table>
@@ -94,6 +106,22 @@
             </div>
         </div>
         <button class="close-btn" onclick="closeWindow('window-minesweeper')">X</button>
+    </div>
+
+    <div id="window-snake" class="window draggable" style="display:none;">
+        <div class="title-bar">Snake</div>
+        <div class="content">
+            <canvas id="snakeCanvas" width="380" height="380"></canvas>
+        </div>
+        <button class="close-btn" onclick="closeWindow('window-snake')">X</button>
+    </div>
+
+    <div id="window-tetris" class="window draggable" style="display:none;">
+        <div class="title-bar">Tetris</div>
+        <div class="content">
+            <canvas id="tetrisCanvas" width="380" height="480"></canvas>
+        </div>
+        <button class="close-btn" onclick="closeWindow('window-tetris')">X</button>
     </div>
 
     <div id="bsod" style="display: none;"></div>
